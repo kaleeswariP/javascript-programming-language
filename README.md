@@ -23,5 +23,10 @@ Javascript programming language guidelines/notebook
 # Coding challenges
 ## 1. What is the output of the snippet below
 
+```
 let language = [ 'python', 'javascript'];
+let obj = {..language};
 
+console.log('2' in language);
+console.log('javascript' in obj);
+```
