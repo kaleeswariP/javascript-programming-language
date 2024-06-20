@@ -14,7 +14,49 @@ Javascript programming language guidelines/notebook
 
 ## 2. Closures
 ### Definition:
+A closure is a function that is bundled together with its lexical environment.ie., It is a function that remembers the scope in which it was created, even if it is execution outside of the scope.
 ### Syntax:
+```javascript
+function outerClosureFunction (input) {
+    let message ='count';
+    const = count = 10;
+    
+    function inner() {
+        return message + count;
+    }
+    
+    return inner;
+}
+
+let closureObj = new outerClosureFunction(3);
+console.log(closureObj());
+```
+**Usecases**
+### Data encapsulation
+You can create private variables that can't be accessed from outside.
+```javascript
+function Counter(){
+let count=0;
+return {
+increment: function(){count++;},
+getCount: function(){ return count;}
+};
+}
+```
+### Factory functions:
+Factory functions are functions that return other functions, often with some arguments or internal variables set to specific values(closures). 
+They are a way to generate functions dynamically but not all dynamic function generation is done through factory functions.
+
+```javascript
+function multiplier(factor){
+return x=> x*factor;
+}
+```
+### Dynamic function generation
+Dynamic function generation refers to the creation of functions at runtime based on certain conditions or parameters. This often involves closures because the dynamically generated functions might close over variables in their surrounding scope.
+### function curation:
+Function curation is the process of taking a function with multiple arguments and producing from it a function that takes fewer arguments. The missing arguments are set to specific values. This is closely related to the concept of "partial application" in functional programming.
+
 
 ## 3. IIFE
 
@@ -110,3 +152,26 @@ function countCharacterOccurrences(str) {
   return charCount; 
 } 
 ```
+
+## 4. Get the output format of the given input string 
+let input = 'apple' the output should be `"A-Pp-Ppp-Llll-Eeeee"`
+
+```javascript
+const sample = (input) => {
+    let spl = input.split('');
+    
+    let res = spl.reduce((acc, val, index) => {
+        for(let i=0; i<=index;i++){
+            if(i==0)
+                acc = acc + val.toUpperCase();
+            else acc = acc + val;
+        }
+        return index==spl.length-1 ? acc : acc+ '-';
+    },'');
+    
+    return res;
+}
+
+console.log(sample(str));
+```
+
