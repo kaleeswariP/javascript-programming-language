@@ -237,3 +237,11 @@ const sample = (input) => {
 console.log(sample(str));
 ```
 
+# Real-time coding snippets for the project
+## 1. Generate random string
+We can use Math.random() to generate a randomString, Its very convenient to generate unique ID
+
+```javascript
+const randomString = () => Math.random().toString(36).slice(2);
+```
+
