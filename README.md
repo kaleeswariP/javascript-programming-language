@@ -9,12 +9,74 @@ Javascript programming language guidelines/notebook
 # Coding concepts
 ## 1. Currying
 ### Definition:
+Currying is a fundamental concept in JavaScript that involves transforming a function with multiple arguments into a series of functions, each taking a single argument.
+This makes the code more flexible and reusable.
 ### Syntax:
-### challenge 1:
+* It is creating a chain of functions,each taking a single argument and returning a new function that waits for the next argument
+* This chaining continues until all the arguments are provided, and the final function produces the desired result.
+### Challenge 1: Currency converter
+```javascript
+const convertCurrency = (conversionRate) => (fromCurrency) => (toCurrency) => (amount) => {
+const convertedAmount = ( amount * conversionRate[fromCurrency][toCurrency]).toFixed(2);
+
+return `${amount} ${fromCurrency} is equal to ${convertedAmount} ${toCurrency}`;
+}
+
+const usdToEur = convertCurrency({USD: { EUR: 0.85}});
+console.log(usdToEur("USD")("EUR")(100));
+
+```
+### Challenge 2: customer permissions
+```javascript
+const checkPermission = permissions => resource => action => {
+    if(permissions[resource] && permissions[resource].includes(action)){
+        return `Permission granted: ${action} in ${resource}`;
+    }
+    
+    return `Permission denied: ${action} in ${resource}`;
+}
+
+const userPermissions = checkPermission({files: ['read','write'], photos:['read']});
+
+console.log(userPermissions("files")("read"));
+```
+### Challenge 3: Functional composition
+
+```javascript
+const pipe = (...fns) => (x) => fns.reduce((acc, fn) => fn(acc),x);
+
+const square = x => x * x;
+
+const double = x => x * 2;
+
+const addOne = x => x + 1;
+
+const transform = pipe(square, double, addOne);
+
+console.log(transform(3));
+// result: 19 (square(3) => double(9) => addOne(18))
+```
+## Currying vs Partial function
+While both currying and partial functions involve breaking down functions, currying generates a chain of functions that each take one argument,<br> whereas partial functions fix some arguments and retuen a new function with fewer arguments.
+Here is a comparison:
+**Currying**
+```javascript
+const multiply = a => b => a * b;
+
+const double = multiply(2);
+console.log(double(5));
+```
+**Partial function**
+```javascript
+const partialMultiply = (a, b) => a* b;
+const double = x => partialMultiply(2,x);
+
+console.log(double(5));
+```
 
 ## 2. Closures
 ### Definition:
-A closure is a function that is bundled together with its lexical environment.ie., It is a function that remembers the scope in which it was created, even if it is execution outside of the scope.
+A closure is a function that is bundled together with its lexical environment.ie., It is a function that remembers the scope in which it was created, even if it is executed outside of the scope.
 ### Syntax:
 ```javascript
 function outerClosureFunction (input) {
