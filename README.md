@@ -236,6 +236,27 @@ const sample = (input) => {
 
 console.log(sample(str));
 ```
+## 5. Remove duplicates from the array or get the unique values in an array
+```javascript
+const removeDuplicates = arr => [...new Set(arr)];
+
+console.log(removeDuplicates([1,2,3,22,3,2,4,5,5,5,6,7]));
+```
+**without using built-in function(set)**
+```javascript
+const removeDuplicates = arr => {
+    let result = [];
+    arr.map((val) => {
+        if(!result.includes(val)){
+            result.push(val);
+        };
+    });
+    
+    return result;
+}
+
+console.log(removeDuplicates([1,2,3,22,3,2,4,5,5,5,6,7]));
+```
 
 # Real-time coding snippets for the project
 ## 1. Generate random string
@@ -269,6 +290,118 @@ Random number of a given length
 ## 2. Copy content to the clipboard
 
 ```javascript
+const copyToClipboard = text => navigator.clipboard.writeText(text);
+copyToClipboard("Hello world");
+```
 
+## 3. Clear all cookies
+```javascript
+const clear = document.cookie.split(';').forEach(cookie => document.cookie = cookie.replace(/^ +/, '').replace(/=.*/, `=;expires=${new Date(0).toUTCString()};path=/`));
+```
+## 4. Get the selected text by the user
+```javascript
+const getSelectedText = () => window.getSelection().toString();
+getSelectedText();
+```
+## 5. Scroll to the top of the page
+```javascript
+const goToTop = () => window.scrollTo(0,0);
+goToTop();
+```
+## 6. Check whether the user has scrolled to the bottom of a page
+```javascript
+const scrolledToBottom = () => document.documentElement.clientHeight + window.scrollY >= document.documentElement.scrollHeight;
+```
+## 7. Find out if the current tab is active
+```javascript
+const isTabInView = () => !document.hidden
+```
+## 8. Redirect the user to a URL
+```javascript
+const redirect = url => location.href = url;
+
+redirect("https://www.google.com/");
+```
+## 9. Open the browser print box
+```javascript
+const showPrintDialog = () => window.print();
+```
+## 10. Generate a random boolean value
+```javascript
+const randomBoolean = () => Math.random() >=0.5;
+
+randomBoolean();
+```
+## 11. Generate a random number between two values
+```javascript
+// Returns a random number between the min and max variable's values
+const randomNumber = Math.random() * (max - min) + min;
+```
+## 12. Check the given number is an integer
+```javascript
+const isInteger = (num) => num % 1 === 0;
+```
+## 13. Check if a variable is an array
+```javascript
+const isArray = arr => Array.isArray(arr);
+```
+## 14. Date related tasks
+**Check if the date is weekend**
+`getDay()` will return the day of the week (from 0 to 6) of a date.
+```javascript
+// Returns a random number between the min and max variable's values
+const randomNumber = Math.random() * (max - min) + min;
+```## 11. Generate a random number between two values
+```javascript
+// Returns a random number between the min and max variable's values
+const randomNumber = Math.random() * (max - min) + min;
+```## 11. Generate a random number between two values
+```javascript
+// Returns a random number between the min and max variable's values
+const randomNumber = Math.random() * (max - min) + min;
+```## 11. Generate a random number between two values
+```javascript
+// Returns a random number between the min and max variable's values
+const randomNumber = Math.random() * (max - min) + min;
+```## 11. Generate a random number between two values
+```javascript
+// Returns a random number between the min and max variable's values
+const randomNumber = Math.random() * (max - min) + min;
+```## 11. Generate a random number between two values
+```javascript
+// Returns a random number between the min and max variable's values
+const randomNumber = Math.random() * (max - min) + min;
+```## 11. Generate a random number between two values
+```javascript
+// Returns a random number between the min and max variable's values
+const randomNumber = Math.random() * (max - min) + min;
+```## 11. Generate a random number between two values
+```javascript
+// Returns a random number between the min and max variable's values
+const randomNumber = Math.random() * (max - min) + min;
+```## 11. Generate a random number between two values
+```javascript
+// Returns a random number between the min and max variable's values
+const randomNumber = Math.random() * (max - min) + min;
+```## 11. Generate a random number between two values
+```javascript
+// Returns a random number between the min and max variable's values
+const randomNumber = Math.random() * (max - min) + min;
+```## 11. Generate a random number between two values
+```javascript
+// Returns a random number between the min and max variable's values
+const randomNumber = Math.random() * (max - min) + min;
+```## 11. Generate a random number between two values
+```javascript
+// Returns a random number between the min and max variable's values
+const randomNumber = Math.random() * (max - min) + min;
+```## 11. Generate a random number between two values
+```javascript
+// Returns a random number between the min and max variable's values
+const randomNumber = Math.random() * (max - min) + min;
+```## 11. Generate a random number between two values
+```javascript
+// Returns a random number between the min and max variable's values
+const randomNumber = Math.random() * (max - min) + min;
 ```
 
