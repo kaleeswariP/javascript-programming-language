@@ -239,9 +239,36 @@ console.log(sample(str));
 
 # Real-time coding snippets for the project
 ## 1. Generate random string
-We can use Math.random() to generate a randomString, Its very convenient to generate unique ID
+We can use `Math.random()` to generate a random string, It very convenient to generate a unique ID
 
 ```javascript
 const randomString = () => Math.random().toString(36).slice(2);
+```
+## 2. Generate a random string of a given length
+
+```javascript
+const randomString = (length =10) => {
+    let result = '';
+    while(result.length < length) {
+        result += Math.random().toString(36).slice(2);
+    }
+    
+    return result.slice(0, length);
+}
+```
+Random number of a given length
+```javascript
+ const generateRandomNumbers = () => {
+    let random = [];
+    for (let i = 0; i < count; i++) {
+      random.push(Math.floor(Math.random() * 10));
+    }
+    setRandom(random);
+  }; 
+```
+## 2. Copy content to the clipboard
+
+```javascript
+
 ```
 
