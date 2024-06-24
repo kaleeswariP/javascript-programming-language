@@ -6,8 +6,11 @@ Javascript programming language guidelines/notebook
 
 ## Strings
 A string is a sequence of characters used to represent text. Strings are one of the fundamental data types in JavaScript
+
 **Declaration:** Strings can be declared using single quotes (') or double quotes (").
+
 **String Methods:** JavaScript provides a variety of built-in methods to manipulate strings, such as toUpperCase(), toLowerCase(), charAt(), substring(), slice(), indexOf(), replace(), trim(), split(), etc.
+
 **Template Literals:** Introduced in ES6, template literals allow for more flexible string formatting and interpolation(process of inserting something into something else) using backticks (`) and ${}` placeholders.
 
 ## Dates Handling
