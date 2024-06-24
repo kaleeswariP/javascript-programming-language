@@ -84,7 +84,7 @@ console.log(transform(3));
 // result: 19 (square(3) => double(9) => addOne(18))
 ```
 ## Currying vs Partial function
-While both currying and partial functions involve breaking down functions, currying generates a chain of functions that each take one argument,<br> whereas partial functions fix some arguments and retuen a new function with fewer arguments.
+While both currying and partial functions involve breaking down functions, currying generates a chain of functions that each take one argument,<br> whereas partial functions fix some arguments and return a new function with fewer arguments.
 Here is a comparison:
 **Currying**
 ```javascript
@@ -94,12 +94,15 @@ const double = multiply(2);
 console.log(double(5));
 ```
 **Partial function**
+This technique is often used for functional programming and can be implemented in various ways in JavaScript, such as using closures or bind() method.
 ```javascript
 const partialMultiply = (a, b) => a* b;
 const double = x => partialMultiply(2,x);
 
 console.log(double(5));
 ```
+*Factory functions are used to create and return instances of objects.*
+*Partial functions are functions created by fixing some arguments of another function, producing a new function with reduced arity (number of arguments).*
 
 ## 2. Closures
 ### Definition:
@@ -133,13 +136,28 @@ getCount: function(){ return count;}
 }
 ```
 ### Factory functions:
-Factory functions are functions that return other functions, often with some arguments or internal variables set to specific values(closures). 
+A factory function is a function that returns an object. It is called a "factory" because it's designed to produce instances of objects, similar to how a factory produces goods.
+Sometimes factory functions return other functions, often with some arguments or internal variables set to specific values(closures). 
 They are a way to generate functions dynamically but not all dynamic function generation is done through factory functions.
 
 ```javascript
 function multiplier(factor){
 return x=> x*factor;
 }
+
+//example2
+function createPerson(name, age) {
+  return {
+    name: name,
+    age: age,
+    greet: function() {
+      console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+    }
+  };
+}
+
+let person1 = createPerson('Alice', 30);
+let person2 = createPerson('Bob', 25);
 ```
 ### Dynamic function generation
 Dynamic function generation refers to the creation of functions at runtime based on certain conditions or parameters. This often involves closures because the dynamically generated functions might close over variables in their surrounding scope.
