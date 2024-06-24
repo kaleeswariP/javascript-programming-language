@@ -4,6 +4,33 @@ Javascript programming language guidelines/notebook
 
 # Javascript Basics
 
+## Strings
+A string is a sequence of characters used to represent text. Strings are one of the fundamental data types in JavaScript
+**Declaration:** Strings can be declared using single quotes (') or double quotes (").
+**String Methods:** JavaScript provides a variety of built-in methods to manipulate strings, such as toUpperCase(), toLowerCase(), charAt(), substring(), slice(), indexOf(), replace(), trim(), split(), etc.
+**Template Literals:** Introduced in ES6, template literals allow for more flexible string formatting and interpolation(process of inserting something into something else) using backticks (`) and ${}` placeholders.
+
+## Dates Handling
+Date functions are methods that allow you to work with dates and times. These functions are part of the built-in Date object in JavaScript.
+
+**Creating a Date Object:**
+`new Date()`: Creates a new Date object representing the current date and time.
+`new Date(milliseconds)`: Creates a new Date object from the number of milliseconds since January 1, 1970, 00:00:00 UTC (the Unix Epoch).
+`new Date(dateString)`: Creates a new Date object from a date string.
+`new Date(year, month, day, hours, minutes, seconds, milliseconds)`: Creates a new Date object with the specified date and time components.
+
+**Getting Date Components:**
+`getDate(), getMonth(), getFullYear()`: Get the day of the month, month (0-11), and year, respectively.
+`getDay()`: Get the day of the week (0-6, where 0 is Sunday).
+`getHours(), getMinutes(), getSeconds(), getMilliseconds()`: Get the hours, minutes, seconds, and milliseconds, respectively.
+
+**Setting Date Components:**
+`setDate(day), setMonth(month), setFullYear(year)`: Set the day of the month, month (0-11), and year, respectively.
+`setHours(hours), setMinutes(minutes), setSeconds(seconds), setMilliseconds(milliseconds)`: Set the hours, minutes, seconds, and milliseconds, respectively.
+
+**Formatting Dates:**
+`toDateString(), toISOString(), toLocaleDateString(), toLocaleString(), toLocaleTimeString(), toString(), toTimeString(), toUTCString()`: These methods convert a Date object to various string representations according to different formatting rules and locales.
+
 #
 
 # Coding concepts
@@ -12,7 +39,7 @@ Javascript programming language guidelines/notebook
 Currying is a fundamental concept in JavaScript that involves transforming a function with multiple arguments into a series of functions, each taking a single argument.
 This makes the code more flexible and reusable.
 ### Syntax:
-* It is creating a chain of functions,each taking a single argument and returning a new function that waits for the next argument
+* It creates a chain of functions, each taking a single argument and returning a new function that waits for the next argument
 * This chaining continues until all the arguments are provided, and the final function produces the desired result.
 ### Challenge 1: Currency converter
 ```javascript
@@ -127,7 +154,7 @@ Function curation is the process of taking a function with multiple arguments an
 ## 5. Inheritance
 
 ### Protype inheritance
-_proto_ is a property of every variable that points to the parent object that is inherited from whereas as prototype is a property of every constructor function that contains all stuff that its instance will inherit. So both are the same thing but act from different ends.
+_proto_ is a property of every variable that points to the parent object inherited from. In contrast, the prototype is a property of every constructor function that contains all stuff that its instance will inherit. So both are the same thing but act from different ends.
 
 The difference between class inheritance and prototypal inheritance is that if any changes to class methods occur after creating some objects then those objects do not get the updated methods as their old/already created instances do not get updated because when we develop functions using this in the constructor are considered as properties, not as methods 
 But, in prototypal inheritance, it will get updated to all the existing instances.
@@ -258,6 +285,64 @@ const removeDuplicates = arr => {
 console.log(removeDuplicates([1,2,3,22,3,2,4,5,5,5,6,7]));
 ```
 
+## 6. String Related tasks
+
+### Check if a string is a palindrome
+A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward 
+```javascript
+const isPalindrome = str => str === str.split('').reverse().join('');
+
+console.log(isPalindrome('racecar'));
+```
+### Remove all the vowels from a string
+```javascript
+const removeVowels = str => str.replace(/[aeiou]/gi, '');
+console.log(removeVowels('hello world'));
+```
+### Check if a string contains a substring
+```javascript
+const contains = (str, subString) => str.includes(subString);
+console.log(contains('hello world', 'll'));
+```
+## 6. Array Related tasks
+### Sorting an array
+```javascript
+const sortAsc = arr => array.sort((a,b) => a -b);
+const sortDesc = arr => array.sort((a,b) => b-a);
+```
+### Get the first n elements of the array
+```javascript
+const take = (arr,n) => arr.slice(0,n);
+console.log(take([1,2,3,4,5,6],3));
+```
+### Get the last n elements of the array
+```javascript
+const take = (arr,n) => arr.slice(-n);
+console.log(take([1,2,3,4,5,6],3));
+```
+### Check if an array is empty
+```javascript
+const isArrayEmpty = arr => Array.isArray(arr) && arr.length > 0;
+console.log(isArrayEmpty([1,2,3,4,5,6]));
+```
+### Find max/min values in array
+```javascript
+Math.max(...array);
+Math.min(...array);
+```
+## 7. Find the domain name from an email
+```javascript
+const extractDomain = mail => mail.split('@')[1];
+
+console.log(extractDomain('kaleewaripss96@gmail.com'));
+```
+## 8. Flatten an nested array
+```javascript
+const extractDomain = mail => mail.split('@')[1];
+
+console.log(extractDomain('kaleewaripss96@gmail.com'));
+```
+
 # Real-time coding snippets for the project
 ## 1. Generate random string
 We can use `Math.random()` to generate a random string, It very convenient to generate a unique ID
@@ -346,16 +431,42 @@ const isInteger = (num) => num % 1 === 0;
 const isArray = arr => Array.isArray(arr);
 ```
 ## 14. Date related tasks
-**Check if the date is weekend**
+**Check if the date is the weekend**
 `getDay()` will return the day of the week (from 0 to 6) of a date.
 ```javascript
-// Returns a random number between the min and max variable's values
-const randomNumber = Math.random() * (max - min) + min;
-```## 11. Generate a random number between two values
+const isWeekend = date => {
+    console.log(date.getDay());
+    return [0, 6].indexOf(date.getDay()) !== -1;
+}
+console.log(isWeekend(new Date('2024-06-22'))); // sat
+console.log(isWeekend(new Date('2024-06-23'))); // sun
+```
+**getting day of the week**
 ```javascript
-// Returns a random number between the min and max variable's values
-const randomNumber = Math.random() * (max - min) + min;
-```## 11. Generate a random number between two values
+function getDayName(dayIndex) {
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  return days[dayIndex];
+}
+// Create a Date object for February 26, 2024 (a Tuesday)
+const today = new Date('2024-02-26');
+// Using getDay() to retrieve the day of the week
+const dayOfWeek = today.getDay();
+
+console.log(`Today is a ${getDayName(dayOfWeek)}.`);
+```
+**Calculate the number of days between two dates**
+```javascript
+const dayDiff = (date, date2) => Math.ceil(Math.abs(date - date2) / 84600000);
+
+console.log(dayDiff(new Date('2023-05-19'), new Date('2024-05-19')));
+```
+## 15. Capitalize a string
+```javascript
+const capitialise = str => str.charAt(0).toUpperCase() + str.slice(1);
+
+console.log(capitialise('hello world'));
+```
+## 11. Generate a random number between two values
 ```javascript
 // Returns a random number between the min and max variable's values
 const randomNumber = Math.random() * (max - min) + min;
