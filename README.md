@@ -2,7 +2,117 @@
 
 Javascript programming language guidelines/notebook
 
-# Javascript Basics
+# Javascript Core Basics
+
+## Variables and Data Types
+
+## Variables: 
+Containers for storing data values.
+```javascript
+var name = 'Alice';    // ES5
+let age = 25;          // ES6
+const isStudent = true; // ES6
+```
+Refer to Hoisting to know more about variable differences. [Hoisting](https://github.com/kaleeswariP/javascript-guide/edit/master/README.md#8-hoisting)
+
+
+## Data Types: 
+JavaScript supports various data types, including:
+
+* **Primitive:** `string`, `number`, `boolean`, `null`, `undefined`, `symbol` `(ES6)`, `bigint` `(ES11)`.
+* **Non-primitive:** `object`, `array`, `function`.
+
+You can refer to call by value and call by difference to know the difference between data types.[Call by value and call by reference](https://github.com/kaleeswariP/javascript-guide/edit/master/README.md#9-call-by-value-and-call-by-difference)
+
+## Operators
+
+* **Arithmetic Operators:** `+`, `-`, `*`, `/`, `%`, `++`, `--`.
+* **Comparison Operators:** `==`, `===`, `!=`, `!==`, `>`, `<`, `>=`, `<=`.
+* **Logical Operators:** `&&`, `||`, `!`.
+
+## Control Structures
+
+* **Conditionals:** `if`, `else if`, `else`, `switch`.
+```javascript
+if (age > 18) {
+  console.log('Adult');
+} else {
+  console.log('Minor');
+}
+```
+* **Loops:** `for`, `while`, `do...while`, `for...of` `(ES6)`, `for...in`.
+
+## Functions
+
+**Function Declaration**
+```javascript
+function greet(name) {
+  return 'Hello, ' + name;
+}
+```
+**Function Expression**
+```javascript
+const greet = function(name) {
+  return 'Hello, ' + name;
+};
+```
+**Arrow functions`(ES6)`**
+```javascript
+const greet = (name) => 'Hello, ' + name;
+```
+
+## Objects and arrays
+* **Objects:** Collections of key-value pairs.
+
+```javascript
+`const user = {
+  name: 'Alice',
+  age: 25,
+  greet: function() {
+    return 'Hello, ' + this.name;
+  }
+};
+console.log(user.greet()); // Hello, Alice
+```
+* **Arrays:** Ordered collections of values.
+
+```javascript
+`const numbers = [1, 2, 3, 4, 5];
+console.log(numbers[0]); // 1
+```
+
+## Asynchronous JavaScript
+### Callbacks: 
+Functions passed as arguments to other functions.
+
+```javascript
+function fetchData(callback) {
+  setTimeout(() => {
+    callback('Data loaded');
+  }, 1000);
+}
+fetchData(data => console.log(data));
+```
+### Promises: 
+Represent future values or errors.
+
+```javascript
+`const promise = new Promise((resolve, reject) => {
+  setTimeout(() => resolve('Data loaded'), 1000);
+});
+promise.then(data => console.log(data));
+```
+### Async/Await (ES8): 
+Syntactic sugar for working with Promises.
+
+```javascript
+async function fetchData() {
+  const data = await promise;
+  console.log(data);
+}
+fetchData();
+```
+Refer [Callbacks-promises-asyncs-await](https://github.com/kaleeswariP/javascript-guide/edit/master/README.md#7-callback-promises-and-async-await)
 
 ## Strings
 A string is a sequence of characters used to represent text. Strings are one of the fundamental data types in JavaScript<br>
@@ -34,7 +144,7 @@ Date functions are methods that allow you to work with dates and times. These fu
 ### **Formatting Dates:**
 `toDateString(), toISOString(), toLocaleDateString(), toLocaleString(), toLocaleTimeString(), toString(), toTimeString(), toUTCString()`: These methods convert a Date object to various string representations according to different formatting rules and locales.
 
-#
+## Dom Manuipulation APIs
 
 # Coding concepts
 ## 1. Currying
@@ -221,6 +331,9 @@ async function convert() {
 convert();
 
 ```
+
+## 8. Hoisting 
+## 9. Call by value and call by difference
 
 
 # Coding challenges
