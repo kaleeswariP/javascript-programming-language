@@ -192,7 +192,6 @@ const greet = name => `Hello, ${name}!`;
 ```
 **No this Binding:** Arrow functions do not have their own `this` context; they inherit `this` from the enclosing lexical scope.
 
-
 ```javascript
 const greet = (name) => 'Hello, ' + name;
 ```
@@ -313,6 +312,8 @@ Refer - [Date related tasks]()
 
 ### **Formatting Dates:**
 `toDateString(), toISOString(), toLocaleDateString(), toLocaleString(), toLocaleTimeString(), toString(), toTimeString(), toUTCString()`: These methods convert a Date object to various string representations according to different formatting rules and locales.
+
+
 
 ## Dom Manuipulation APIs
 DOM (Document Object Model) manipulation APIs in JavaScript allow developers to interact with and modify the structure, style, and content of web documents. These APIs provide methods to create, remove, change, and traverse elements and their attributes in the DOM.
