@@ -32,7 +32,8 @@ You can refer to call by value and call by difference to know the difference bet
 
 ## Control Structures
 
-* **Conditionals:** `if`, `else if`, `else`, `switch`.
+### **Conditionals:** 
+`if`, `else if`, `else`, `switch`.
 ```javascript
 if (age > 18) {
   console.log('Adult');
@@ -40,7 +41,82 @@ if (age > 18) {
   console.log('Minor');
 }
 ```
-* **Loops:** `for`, `while`, `do...while`, `for...of` `(ES6)`, `for...in`.
+### **Loops:**
+`for`, `while`, `do...while`, `for...of` `(ES6)`, `for...in`.
+
+#### `for ...in` loop
+
+**Purpose:** The for...in loop is used to iterate over the enumerable properties of an object (including inherited properties).
+
+**Usage:** It is commonly used to loop through the properties of an object.
+
+**Iterates Over:** <strong>Keys (property names) of the object.</strong>
+
+Example
+```javascript
+const person = { name: 'Alice', age: 25, city: 'New York' };
+
+for (let key in person) {
+  console.log(`${key}: ${person[key]}`);
+}
+```
+#### `for ...of` loop
+
+**Purpose:** The `for...of` loop is used to iterate over iterable objects (like arrays, strings, maps, sets, etc.).
+
+**Usage:** It is commonly used to loop through the values of an iterable object.
+
+**Iterates Over:**  <strong>Values of the iterable.</strong>
+
+**Remember strings are also iterable objects so you can use ```for ...of``` to iterate string** Refer - [String](https://github.com/kaleeswariP/javascript-guide/edit/master/README.md#strings)
+
+
+### Loop-breaking statements
+loop breaking statements are used to alter the flow of loop iterations.
+
+Two primary statements are used for this purpose: `break` and `continue`.  
+#### `break` statement
+The `break` statement is used to terminate the loop immediately, regardless of the iteration count or condition. 
+
+When a `break` statement is encountered inside a loop, the loop stops executing, and the control is transferred to the statement immediately following the loop.
+
+```javascript
+for (let i = 0; i < 10; i++) {
+  if (i === 5) {
+    break; // Exit the loop when i equals 5
+  }
+  console.log(i);
+}
+```
+#### `continue` Statement
+The `continue` statement is used to skip the current iteration of the loop and move to the next iteration.
+
+When a `continue` statement is encountered, the loop continues with the next iteration, bypassing the remaining code inside the loop for the current iteration.
+
+```javascript
+for (let i = 0; i < 10; i++) {
+  if (i % 2 === 0) {
+    continue; // Skip even numbers
+  }
+  console.log(i);
+}
+```
+#### Nested loops
+In nested loops, `break` and `continue` only affect the loop they are in. To break out of an outer loop, you can use labeled statements.
+
+**Labeled Statements:** Allow breaking out of or continuing specific loops in nested loop structures
+
+```javascript
+outerLoop: for (let i = 0; i < 3; i++) { // labeled statement
+  for (let j = 0; j < 3; j++) {
+    if (i === 1 && j === 1) {
+      break outerLoop; // Exit both loops
+    }
+    console.log(`i = ${i}, j = ${j}`);
+  }
+}
+
+```
 
 ## Functions
 
@@ -123,22 +199,31 @@ A string is a sequence of characters used to represent text. Strings are one of 
 
 **Template Literals:** Introduced in ES6, template literals allow for more flexible string formatting and interpolation(process of inserting something into something else) using backticks `() and ${}` placeholders.<br>
 
+Refer - [string related tasks](https://github.com/kaleeswariP/javascript-guide/edit/master/README.md#6-string-related-tasks)
+
 ## Dates Handling
 Date functions are methods that allow you to work with dates and times. These functions are part of the built-in Date object in JavaScript.<br>
+Refer - [Date related tasks]()
 
 ### **Creating a Date Object:**
 `new Date()`: Creates a new Date object representing the current date and time.<br>
+
 `new Date(milliseconds)`: Creates a new Date object from the number of milliseconds since January 1, 1970, 00:00:00 UTC (the Unix Epoch).<br>
+
 `new Date(dateString)`: Creates a new Date object from a date string.<br>
+
 `new Date(year, month, day, hours, minutes, seconds, milliseconds)`: Creates a new Date object with the specified date and time components.<br>
 
 ### **Getting Date Components:**
 `getDate(), getMonth(), getFullYear()`: Get the day of the month, month (0-11), and year, respectively.<br>
+
 `getDay()`: Get the day of the week (0-6, where 0 is Sunday).<br>
+
 `getHours(), getMinutes(), getSeconds(), getMilliseconds()`: Get the hours, minutes, seconds, and milliseconds, respectively.<br>
 
 ### **Setting Date Components:**
 `setDate(day), setMonth(month), setFullYear(year)`: Set the day of the month, month (0-11), and year, respectively.<br>
+
 `setHours(hours), setMinutes(minutes), setSeconds(seconds), setMilliseconds(milliseconds)`: Set the hours, minutes, seconds, and milliseconds, respectively.
 
 ### **Formatting Dates:**
