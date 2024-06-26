@@ -5,33 +5,33 @@ Javascript programming language guidelines/notebook
 # Javascript Basics
 
 ## Strings
-A string is a sequence of characters used to represent text. Strings are one of the fundamental data types in JavaScript
+A string is a sequence of characters used to represent text. Strings are one of the fundamental data types in JavaScript<br>
 
-**Declaration:** Strings can be declared using single quotes (') or double quotes (").
+**Declaration:** Strings can be declared using single quotes (') or double quotes (").<br>
 
-**String Methods:** JavaScript provides a variety of built-in methods to manipulate strings, such as toUpperCase(), toLowerCase(), charAt(), substring(), slice(), indexOf(), replace(), trim(), split(), etc.
+**String Methods:** JavaScript provides a variety of built-in methods to manipulate strings, such as toUpperCase(), toLowerCase(), charAt(), substring(), slice(), indexOf(), replace(), trim(), split(), etc.<br>
 
-**Template Literals:** Introduced in ES6, template literals allow for more flexible string formatting and interpolation(process of inserting something into something else) using backticks (`) and ${}` placeholders.
+**Template Literals:** Introduced in ES6, template literals allow for more flexible string formatting and interpolation(process of inserting something into something else) using backticks `() and ${}` placeholders.<br>
 
 ## Dates Handling
-Date functions are methods that allow you to work with dates and times. These functions are part of the built-in Date object in JavaScript.
+Date functions are methods that allow you to work with dates and times. These functions are part of the built-in Date object in JavaScript.<br>
 
-**Creating a Date Object:**
-`new Date()`: Creates a new Date object representing the current date and time.
-`new Date(milliseconds)`: Creates a new Date object from the number of milliseconds since January 1, 1970, 00:00:00 UTC (the Unix Epoch).
-`new Date(dateString)`: Creates a new Date object from a date string.
-`new Date(year, month, day, hours, minutes, seconds, milliseconds)`: Creates a new Date object with the specified date and time components.
+### **Creating a Date Object:**
+`new Date()`: Creates a new Date object representing the current date and time.<br>
+`new Date(milliseconds)`: Creates a new Date object from the number of milliseconds since January 1, 1970, 00:00:00 UTC (the Unix Epoch).<br>
+`new Date(dateString)`: Creates a new Date object from a date string.<br>
+`new Date(year, month, day, hours, minutes, seconds, milliseconds)`: Creates a new Date object with the specified date and time components.<br>
 
-**Getting Date Components:**
-`getDate(), getMonth(), getFullYear()`: Get the day of the month, month (0-11), and year, respectively.
-`getDay()`: Get the day of the week (0-6, where 0 is Sunday).
-`getHours(), getMinutes(), getSeconds(), getMilliseconds()`: Get the hours, minutes, seconds, and milliseconds, respectively.
+### **Getting Date Components:**
+`getDate(), getMonth(), getFullYear()`: Get the day of the month, month (0-11), and year, respectively.<br>
+`getDay()`: Get the day of the week (0-6, where 0 is Sunday).<br>
+`getHours(), getMinutes(), getSeconds(), getMilliseconds()`: Get the hours, minutes, seconds, and milliseconds, respectively.<br>
 
-**Setting Date Components:**
-`setDate(day), setMonth(month), setFullYear(year)`: Set the day of the month, month (0-11), and year, respectively.
+### **Setting Date Components:**
+`setDate(day), setMonth(month), setFullYear(year)`: Set the day of the month, month (0-11), and year, respectively.<br>
 `setHours(hours), setMinutes(minutes), setSeconds(seconds), setMilliseconds(milliseconds)`: Set the hours, minutes, seconds, and milliseconds, respectively.
 
-**Formatting Dates:**
+### **Formatting Dates:**
 `toDateString(), toISOString(), toLocaleDateString(), toLocaleString(), toLocaleTimeString(), toString(), toTimeString(), toUTCString()`: These methods convert a Date object to various string representations according to different formatting rules and locales.
 
 #
