@@ -46,7 +46,7 @@ if (age > 18) {
 
 #### `for ...in` loop
 
-**Purpose:** The for...in loop is used to iterate over the enumerable properties of an object (including inherited properties).
+**Purpose:** The `for...in` loop is used to iterate over the enumerable properties of an object (including inherited properties).
 
 **Usage:** It is commonly used to loop through the properties of an object.
 
@@ -68,8 +68,40 @@ for (let key in person) {
 
 **Iterates Over:**  <strong>Values of the iterable.</strong>
 
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+
+for (let number of numbers) {
+  console.log(number);
+}
+```
+
 **Remember strings are also iterable objects so you can use ```for ...of``` to iterate string** Refer - [String](https://github.com/kaleeswariP/javascript-guide/edit/master/README.md#strings)
 
+Use ``for...of`` when you need to access the values of an iterable object like an array, string, Map, Set, etc.
+
+**Inherited Properties:**
+
+`for...in` will iterate over all enumerable properties, including those inherited through the prototype chain.
+
+`for...of` only iterates over the values in the iterable object and does not consider inherited properties.
+
+Example with prototype:
+```javascript
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+Person.prototype.city = 'New York';
+
+const person = new Person('Alice', 25);
+
+for (let key in person) {
+  console.log(`${key}: ${person[key]}`);
+}
+
+```
 
 ### Loop-breaking statements
 loop breaking statements are used to alter the flow of loop iterations.
@@ -120,22 +152,75 @@ outerLoop: for (let i = 0; i < 3; i++) { // labeled statement
 
 ## Functions
 
-**Function Declaration**
+### **Function Declaration**
+A function declaration defines a named function using the `function` keyword. 
+
+Function declarations are hoisted, which means they can be called before they are defined in the code.
+
+**Hoisting:** Function declarations are hoisted to the top of their scope, so they can be called before they are defined. Refer - [Hoisting]()
+**Named Functions:** Function declarations must have a name.
+**Can be Recursive:** Named functions can call themselves recursively.
+
 ```javascript
 function greet(name) {
   return 'Hello, ' + name;
 }
 ```
-**Function Expression**
+### **Function Expression**
+A function expression defines a function inside an expression.
+
+Function expressions can be named or anonymous. 
+
+They are not hoisted, so they cannot be called before they are defined.
+
+**Not Hoisted:** Function expressions are not hoisted, so they must be defined before they are called.
+**Anonymous or Named:** Function expressions can be anonymous or have a name.
+**Useful for Closures:** Function expressions are commonly used in closures and IIFEs (Immediately Invoked Function Expressions). Refer to [Closures]() and [IIFEs]()
+
 ```javascript
 const greet = function(name) {
   return 'Hello, ' + name;
 };
 ```
-**Arrow functions`(ES6)`**
+### **Arrow functions`(ES6)`**
+Arrow functions, introduced in ES6, provide a shorter syntax for writing function expressions. They have a different behavior regarding the `this` keyword compared to regular functions.
+
+**Shorter Syntax:** Arrow functions have a concise syntax.
+**Implicit Return:** If the function body consists of a single expression, it can return the value implicitly without the return keyword.
+```javascript
+const greet = name => `Hello, ${name}!`;
+```
+**No this Binding:** Arrow functions do not have their own `this` context; they inherit `this` from the enclosing lexical scope.
+
+
 ```javascript
 const greet = (name) => 'Hello, ' + name;
 ```
+**Cannot be Used as Constructors:** Arrow functions cannot be used with the `new` keyword to create instances.
+```javascript
+const Person = (name) => {
+  this.name = name;
+};
+
+const alice = new Person('Alice'); // TypeError: Person is not a constructor
+
+```
+**No arguments Object:** Arrow functions do not have their own `arguments` object. They inherit arguments from the parent scope.
+```javascript
+function regularFunction() {
+  console.log(arguments);
+}
+
+const arrowFunction = () => {
+  console.log(arguments);
+};
+
+regularFunction(1, 2, 3); // [1, 2, 3]
+arrowFunction(1, 2, 3);   // ReferenceError: arguments is not defined
+
+```
+![image](https://github.com/kaleeswariP/javascript-guide/assets/22699303/c5210b4d-91ff-4e3e-a54c-d0d0b54991cb)
+
 
 ## Objects and arrays
 * **Objects:** Collections of key-value pairs.
@@ -230,6 +315,244 @@ Refer - [Date related tasks]()
 `toDateString(), toISOString(), toLocaleDateString(), toLocaleString(), toLocaleTimeString(), toString(), toTimeString(), toUTCString()`: These methods convert a Date object to various string representations according to different formatting rules and locales.
 
 ## Dom Manuipulation APIs
+DOM (Document Object Model) manipulation APIs in JavaScript allow developers to interact with and modify the structure, style, and content of web documents. These APIs provide methods to create, remove, change, and traverse elements and their attributes in the DOM.
+
+### 1. Selecting Elements
+
+**`getElementById`**
+Select an element by its ID.
+
+```javascript
+const element = document.getElementById('myId');
+````
+**`getElementsByClassName`**
+Selects elements by their class name. Returns a live HTMLCollection.
+
+```javascript
+const elements = document.getElementsByClassName('myClass');
+```
+**`getElementsByTagName`**
+Selects elements by their tag name. Returns a live HTMLCollection.
+
+```javascript
+const elements = document.getElementsByTagName('div');
+```
+**`querySelector`**
+Selects the first element that matches a CSS selector.
+
+```javascript
+const element = document.querySelector('.myClass');
+```
+**`querySelectorAll`**
+Selects all elements that match a CSS selector. Returns a static NodeList.
+
+```javascript
+const elements = document.querySelectorAll('.myClass');
+```
+
+### 2. Modifying Element Content
+**`innerHTML`**
+Gets or sets the HTML content inside an element.
+
+```javascript
+element.innerHTML = '<p>New content</p>';
+```
+**`textContent`**
+Gets or sets the text content inside an element.
+
+```javascript
+`element.textContent = 'New text content';
+```
+### 3. Modifying Element Attributes
+
+**`getAttribute`**
+Gets the value of an attribute on the specified element.
+
+```javascript
+const value = element.getAttribute('src');
+```
+**`setAttribute`**
+Sets the value of an attribute on the specified element.
+
+```javascript
+element.setAttribute('src', 'newImage.jpg');
+```
+**`removeAttribute`**
+Removes an attribute from the specified element.
+
+```javascript
+element.removeAttribute('src');
+```
+### 4. Modifying Element Styles
+**`style`**
+Directly modifies the CSS styles of an element.
+
+```javascript
+element.style.color = 'blue';
+element.style.fontSize = '20px';
+```
+### Adding and Removing Classes
+**`classList**
+Provides methods to add, remove, and toggle classes.
+
+```javascript
+element.classList.add('newClass');
+element.classList.remove('oldClass');
+element.classList.toggle('active');
+```
+### 6. Creating and Inserting Elements
+**`createElement`**
+Creates a new element.
+
+```javascript
+const newElement = document.createElement('div');
+```
+**`appendChild`**
+Adds a new child node to the end of a specified parent node.
+
+```javascript
+parentElement.appendChild(newElement);
+```
+**`insertBefore`**
+Inserts a new node before a specified existing node.
+
+```javascript
+parentElement.insertBefore(newElement, referenceElement);
+```
+**`removeChild`**
+Removes a child node from the DOM.
+
+```javascript
+parentElement.removeChild(childElement);
+```
+**`replaceChild`**
+Replaces a child node with a new node.
+
+```javascript
+parentElement.replaceChild(newElement, oldElement);
+```
+### 7. Event Handling
+**`addEventListener`**
+Attaches an event handler to an element.
+
+```javascript
+element.addEventListener('click', function() {
+  console.log('Element clicked!');
+});
+```
+**`removeEventListener`**
+Removes an event handler from an element.
+
+```javascript
+element.removeEventListener('click', eventHandlerFunction);
+```
+### 8. Traversing the DOM
+**`parentNode`**
+Gets the parent node of an element.
+
+```javascript
+const parent = element.parentNode;
+```
+**`childNodes**`
+Gets a collection of a node's child nodes, including text nodes and comments.
+
+```javascript
+const children = element.childNodes;
+```
+**`firstChild` and `lastChild**
+Gets the first and last child nodes of an element.
+
+```javascript
+const first = element.firstChild;
+const last = element.lastChild;
+```
+**`nextSibling` and `previousSibling`**
+Gets the next and previous sibling nodes of an element.
+
+```javascript
+const next = element.nextSibling;
+const previous = element.previousSibling;
+```
+**`children`**
+Gets a live HTMLCollection of the element's child elements (excluding text and comment nodes).
+
+```javascript
+const children = element.children;
+```
+**`firstElementChild` and `lastElementChild`**
+Gets the first and last child elements.
+
+```javascript
+const first = element.firstElementChild;
+const last = element.lastElementChild;
+```
+**`nextElementSibling` and `previousElementSibling`**
+Gets the next and previous sibling elements.
+
+```javascript
+const next = element.nextElementSibling;
+const previous = element.previousElementSibling;
+```
+
+## Web storage in JS
+Since HTML5 was introduced, we have had a variety of methods for caching or storing data on the client browser.<br>
+
+Web storage - Although it operates on similar concepts to server-side storage, browser storage or client-side storage has various use cases. It is made up of JavaScript APIs that enable us to store data on the client (i.e., on the user's computer), where it may later be retrieved as needed.<br>
+
+**Cookies, local storage, and session storage are the three methods most frequently used to save data locally on browsers.** 
+
+Javascript could access web storage, and the server couldn't read any of this information unless it was manually included in the request.
+
+HTML web storage offers two objects for data storage on the client:
+
+* Data is stored in local storage objects that have no expiration dates.
+* Data is stored for one session in a session storage object (data is lost when the browser tab is closed).
+
+### Local Storage
+We can store data as key/value pairs in a web browser using the local storage web storage technique on the client's computer. 
+
+Unless the user explicitly deletes it from the browser, the data is kept in local storage forever
+
+There are four ways to set, retrieve, remove, and clear data from local storage:
+
+* To set the data in local storage, use the setItem() method. The parameters for this method are key and value. With this method, we can store value with a key. localStorage.setItem(key, value);
+* We can use the getItem() method to access the data kept in local storage. The key whose value we need to retrieve is the sole parameter for this procedure. localStorage.getItem(key);
+* The removeItem() method, which is kept in memory with the key, allows us to delete the data. localStorage.removeItem(key);
+* All of the data kept in the local storage can be cleared using the clear() method.
+
+Depending on our use case, there are advantages and disadvantages to using local storage
+
+**Advantages**
+* There is no expiration date for the data kept in local storage.
+* The storage limitation is approximately 10MB.
+* Data from local storage is never sent to the server.
+  
+**Disadvantages**
+* Since local storage data is in plain text, it is not designed to be secure.
+* Since the data type is restricted to strings, serialization is required.
+* Only the client side, not the server side, is capable of reading data.
+
+### Session Storage
+The localStorage and the sessionStorage are extremely similar. However, the primary distinction is in how long information stays in the browser—until the current tab or session is active. 
+
+The data stored in session storage is also deleted when you close the tab or end the session. 
+
+Using the setItem() and getItem() methods, we can also set and get session data, just like we do with local storage.
+
+### Cookie
+Cookies assist us in storing client-side data to provide website visitors with a customized experience. Cookies are transmitted to the server along with requests and returned to the client in response; as a result, the server and client exchange cookie data with each request. 
+
+The servers could deliver user-tailored content using the cookie data.
+
+**To mitigate a few security vulnerabilities like cross-site scripting, we have an HTTPOnly cookie flag that may be used to limit cookie access in JavaScript (the cookies are only available for servers to access).**
+
+Session Cookies - Session cookies are deleted when the browser is closed because they do not contain attributes such as Expires or Max-Age.
+
+Session Cookies - Session cookies are deleted when the browser is closed because they do not contain attributes such as Expires or Max-Age.
+
+![image](https://github.com/kaleeswariP/javascript-guide/assets/22699303/930dc92e-07f6-4e86-a02c-3c957e5fb8c7)
+
+
 
 # Coding concepts
 ## 1. Currying
