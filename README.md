@@ -3,6 +3,39 @@
 Javascript programming language guidelines/notebook
 
 # Javascript Core Basics
+  * [Variables and Data Types](https://github.com/kaleeswariP/javascript-guide/edit/master/README.md#variables-and-data-types)
+      * [Variables](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#variables)
+      * [Data types](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#data-types)
+  * [Operators](https://github.com/kaleeswariP/javascript-guide#operators)
+  * [Control Structures](https://github.com/kaleeswariP/javascript-guide/edit/master/README.md#control-structures)
+      * [Conditionals](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#conditionals)
+      * [`for ...in` loop](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#for-in-loop)
+      * [`for ...of` loop](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#for-of-loop)
+      * [`foreach`]()
+      * [control statements - break, continue](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#loop-breaking-statements)
+  * [Functions](https://github.com/kaleeswariP/javascript-guide#functions)
+      * [Function declaration](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#function-declaration)
+      * [Function expression](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#function-expression)
+      * [Arrow functions](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#arrow-functionses6)
+  * [Objects and Arrays](https://github.com/kaleeswariP/javascript-guide#objects-and-arrays)
+      * [Objects]()
+      * [Arrays]()
+  * [Asynchronous javascripts](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#asynchronous-javascript)
+      * [Callback](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#callbacks)
+      * [Promise]()
+      * [Async-await]() 
+  * [Strings](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#strings)
+  * [Dates Handling](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#dates-handling)
+  * [Map and Set]()
+      * [Map]()
+      * [WeekMap]()
+      * [Set]()
+      * [WeekSet]()
+  * [DOM Manipulation APIs](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#dates-handling)
+  * [Web storage in JS](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#web-storage-in-js)
+      * [Local storage]()
+      * [Session storage]()
+      * [Cookies]()
 
 ## Variables and Data Types
 
@@ -321,6 +354,188 @@ Refer - [Date related tasks]()
 ### **Formatting Dates:**
 `toDateString(), toISOString(), toLocaleDateString(), toLocaleString(), toLocaleTimeString(), toString(), toTimeString(), toUTCString()`: These methods convert a Date object to various string representations according to different formatting rules and locales.
 
+## Map and Set
+Map and Set are two built-in objects introduced in ECMAScript 2015 (ES6) that provide additional ways to manage collections of data. 
+
+They offer more sophisticated capabilities compared to plain objects and arrays, particularly in terms of **key-value pair** handling and ensuring uniqueness.
+
+`WeakMap` and `WeakSet` are special types of collections in JavaScript introduced in ECMAScript 2015 (ES6).
+
+They are similar to `Map` and `Set` but have some key differences, particularly in terms of how they handle references to objects and their garbage collection behavior.
+
+
+### Map
+A `Map` is an ordered collection of key-value pairs, where keys can be of any type (including objects, functions, and primitive types).
+
+It maintains the insertion order of its elements, meaning that when you iterate over the keys, they appear in the order they were inserted.
+
+**Basic Operations:** Creating a Map, Adding Elements, Retrieving Elements, Checking for Existence, Removing Elements, Getting the Size, and Clearing All Elements.
+
+```javascript
+const myMap = new Map();
+
+myMap.set('a', 1);
+myMap.set('b', 2);
+
+console.log(myMap.get('a')); // 1
+
+console.log(myMap.has('b')); // true
+
+myMap.delete('a');
+
+console.log(myMap.size); // 1
+
+myMap.clear();
+
+```
+
+**Iteration** You can iterate over the keys, values, or entries of a `Map`.
+```javascript
+const myMap = new Map([
+  ['a', 1],
+  ['b', 2],
+  ['c', 3]
+]);
+
+// Iterating over keys
+for (const key of myMap.keys()) {
+  console.log(key); // 'a', 'b', 'c'
+}
+
+// Iterating over values
+for (const value of myMap.values()) {
+  console.log(value); // 1, 2, 3
+}
+
+// Iterating over entries
+for (const [key, value] of myMap.entries()) {
+  console.log(key, value); // ['a', 1], ['b', 2], ['c', 3]
+}
+```
+
+### WeekMap
+
+A  `WeakMap` is a collection of key-value pairs where the keys are objects and the values can be arbitrary values. 
+
+The key feature of a `WeakMap` is that it holds "weak" references to the keys, which means that if there are no other references to the key object, it can be garbage collected.
+
+**Characteristics**<br>
+
+Keys must be objects: Primitive data types `(e.g., `strings`, `numbers`)` cannot be used as keys.
+
+No size property: `WeakMap` does not have a `size` property or any method to get the number of entries.
+
+No iterations: You cannot iterate over the entries of a `WeakMap` (no `keys()`, `values()`, `entries()`, or `forEach()` methods).
+
+Garbage collection: If the key object is no longer reachable from the program, it can be garbage collected, and its entry in the `WeakMap` will be removed.
+
+**Methods**<br>
+
+`set(key, value)`: Adds or updates an entry with the specified key and value.
+
+`get(key)`: Returns the value associated with the specified key, or undefined if the key is not in the WeakMap.
+
+`has(key)`: Returns true if an entry with the specified key exists, otherwise false.
+
+`delete(key)`: Removes the entry with the specified key.
+
+Example:
+```javascript
+let wm = new WeakMap();
+let obj = {};
+
+// Adding an entry
+wm.set(obj, 'some value');
+console.log(wm.get(obj)); // 'some value'
+
+// Checking for an entry
+console.log(wm.has(obj)); // true
+
+// Removing an entry
+wm.delete(obj);
+console.log(wm.has(obj)); // false
+```
+
+### Set
+A `Set` is a collection of unique values. It can contain any type of value (primitives or object references) and automatically removes duplicate values.
+
+**Basic Operations:** Creating a Set, Adding Elements, Checking for Existence, Removing Elements, Getting the size, and Clearing all elements
+
+```javascript
+const mySet = new Set();
+
+mySet.add(1);
+mySet.add(2);
+mySet.add(2); // Duplicate values are ignored
+
+console.log(mySet.has(1)); // true
+
+mySet.delete(2);
+
+console.log(mySet.size); // 1
+
+mySet.clear();
+
+```
+
+**Iteration:** You can iterate over the values of a `Set`.
+
+```javascript
+const mySet = new Set([1, 2, 3]);
+
+// Iterating over values
+for (const value of mySet) {
+  console.log(value); // 1, 2, 3
+}
+```
+
+
+### WeekSet
+A `WeakSet` is a collection of objects, where each object can occur only once in the set. 
+
+Like `WeakMap`, a `WeakSet` holds weak references to its objects, allowing for garbage collection when there are no other references to an object.
+
+**Characteristics**<br>
+
+Only objects as values: Primitive data types cannot be added to a `WeakSet`.
+
+No size property: `WeakSet` does not have a `size` property or any method to get the number of elements.
+
+No iterations: You cannot iterate over the elements of a `WeakSet` `(no `keys()`, `values()`, `entries()`, or `forEach()` methods)`.
+
+Garbage collection: If an object is no longer reachable from the program, it can be garbage collected, and its entry in the `WeakSet` will be removed.
+
+**Methods**<br>
+
+`add(value)`: Adds a new object to the `WeakSet`.
+
+`has(value)`: Returns true if the object is in the `WeakSet`, otherwise `false`.
+
+`delete(value)`: Removes the specified object from the `WeakSet`.
+
+Example
+```javascript
+let ws = new WeakSet();
+let obj = {};
+
+// Adding an object
+ws.add(obj);
+console.log(ws.has(obj)); // true
+
+// Removing an object
+ws.delete(obj);
+console.log(ws.has(obj)); // false
+```
+
+### Difference between Map and Set
+
+|                     |     Map                 |          Set         |
+|---------------------|-------------------------|----------------------|
+| Data Structure      | Stores key-value pairs  | Stores unique values |
+| Key Types           |Keys can be any type (objects, functions, primitive types)| Only stores values, which must be unique.
+|Order of Elements  |Maintains the insertion order of key-value pairs|Maintains the insertion order of values
+|Methods|set, get, has, delete, clear, keys, values, entries|add, has, delete, clear, keys, values, entries
+
 
 ## Dom Manuipulation APIs
 DOM (Document Object Model) manipulation APIs in JavaScript allow developers to interact with and modify the structure, style, and content of web documents. These APIs provide methods to create, remove, change, and traverse elements and their attributes in the DOM.
@@ -561,6 +776,7 @@ Session Cookies - Session cookies are deleted when the browser is closed because
 ![image](https://github.com/kaleeswariP/javascript-guide/assets/22699303/930dc92e-07f6-4e86-a02c-3c957e5fb8c7)
 
 # Advanced Topics
+  *[Event Loop, Microtasks, Macrotasks]
 
 ## Event Loop, Microtasks, Macrotasks
 
@@ -978,6 +1194,96 @@ Subclasses can override methods from the superclass to provide specific implemen
 
 
 ## 6. Spread and rest operator
+The spread and rest operators in JavaScript are both represented by three consecutive dots `(`...`)`. 
+
+### Spread Operator
+The spread operator is used to expand elements of an iterable (like an array or a string) into individual elements.
+
+#### Use Cases
+
+1. Arrays: Copying Arrays, Merging Arrays, and adding elements to the array.
+   
+```javascript
+const arr1 = [1, 2, 3];
+const arr2 = [...arr1];
+console.log(arr2); // [1, 2, 3]
+
+const merged = [...arr1, ...arr2];
+console.log(merged); // [1, 2, 3, 4, 5, 6]
+
+const newArr = [0, ...arr, 4];
+console.log(newArr); // [0, 1, 2, 3, 4]
+```
+
+2. Objects: Copying Objects, Merging Objects, Adding Properties to an Object
+
+```javascript
+const obj1 = { a: 1, b: 2 };
+const obj2 = { ...obj1 };
+console.log(obj2); // { a: 1, b: 2 }
+
+const mergedObj = { ...obj1, ...obj2 };
+console.log(mergedObj); // { a: 1, b: 2, c: 3, d: 4 }
+
+const newObj = { ...obj, c: 3 };
+console.log(newObj); // { a: 1, b: 2, c: 3 }
+
+```
+
+3. Function Calls: The spread operator can be used to pass an array as arguments to a function.
+
+```javascript
+function sum(x, y, z) {
+  return x + y + z;
+}
+const numbers = [1, 2, 3];
+console.log(sum(...numbers)); // 6
+
+```
+
+### Rest Operator
+
+The rest operator is used to gather a variable number of arguments into an array. It is primarily used in function parameter lists to handle an indefinite number of arguments.
+
+#### Use cases
+
+1. Function Parameters: Gathering Remaining Arguments, Combining with Named Parameters.
+
+```javascript
+function sum(...args) {
+  return args.reduce((acc, val) => acc + val, 0);
+}
+console.log(sum(1, 2, 3, 4)); // 10
+
+function myFunction(a, b, ...rest) {
+  console.log(a); // 1
+  console.log(b); // 2
+  console.log(rest); // [3, 4, 5]
+}
+myFunction(1, 2, 3, 4, 5);
+
+```
+  
+2. Array Destructuring: The rest operator can be used to collect the remaining elements of an array.
+
+```javascript
+const [a, b, ...rest] = [1, 2, 3, 4, 5];
+console.log(a); // 1
+console.log(b); // 2
+console.log(rest); // [3, 4, 5]
+```
+
+3. Object Destructuring: The rest operator can also be used in object destructuring to collect remaining properties.
+
+```javascript
+const { a, b, ...rest } = { a: 1, b: 2, c: 3, d: 4 };
+console.log(a); // 1
+console.log(b); // 2
+console.log(rest); // { c: 3, d: 4 }
+
+```
+
+
 
 ## 7. Callback, Promises, and Async Await
 
