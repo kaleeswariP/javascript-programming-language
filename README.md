@@ -789,25 +789,6 @@ var myModule = (function() {
 
 myModule.publicMethod(); // I am private
 ```
-**Module Pattern:**
-IIFEs are often used in the module pattern to create modules with private and public methods.
-```javascript
-var myModule = (function() {
-  var privateVar = "I am private";
-
-  function privateMethod() {
-    console.log(privateVar);
-  }
-
-  return {
-    publicMethod: function() {
-      privateMethod();
-    }
-  };
-})();
-
-myModule.publicMethod(); // I am private
-```
 
 
 ## 4. Destructuring 
