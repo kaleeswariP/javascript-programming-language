@@ -553,7 +553,32 @@ Session Cookies - Session cookies are deleted when the browser is closed because
 
 ![image](https://github.com/kaleeswariP/javascript-guide/assets/22699303/930dc92e-07f6-4e86-a02c-3c957e5fb8c7)
 
+# Advanced Topics
 
+## Polyfills
+(Mostly asked polyfills: `Promise`, `Promise.all`, `Promise.any`, `Promise.race`, `Promise.allSettled`, `call`, `apply`, `bind`, `map`, `reduce`, `filter`, `forEach`, `flat`, `fetch API`)
+## Memoization
+
+## Generator Functions
+
+## Web APIs
+
+## Design Patterns
+
+**Creational Patterns**
+* Singleton
+* Factory Method
+* Abstract Factory
+* Builder
+* Prototype
+
+**Structural Patterns**
+* Adapter
+* Decorator
+* Facade
+* Proxy
+  
+##  Working of JS Engine 
 
 # Coding concepts
 ## 1. Currying
