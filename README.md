@@ -790,8 +790,120 @@ var myModule = (function() {
 myModule.publicMethod(); // I am private
 ```
 
+## 4. Destructuring
+Destructuring is a feature in JavaScript that allows you to extract values from arrays or properties from objects and assign them to variables in a more concise and readable way. 
 
-## 4. Destructuring 
+### Destructuring Arrays
+Array destructuring allows you to unpack values from arrays into distinct variables.
+
+Basic Syntax
+```javascript
+const [a, b] = [1, 2];
+console.log(a); // 1
+console.log(b); // 2
+```
+**Skipping Items**
+
+You can skip items in the array by leaving an empty space.
+
+```javascript
+const [a, , b] = [1, 2, 3];
+console.log(a); // 1
+console.log(b); // 3
+```
+
+**Default Values**
+
+You can provide default values in case the array does not have enough elements.
+
+```javascript
+const [a, b = 5] = [1];
+console.log(a); // 1
+console.log(b); // 5
+```
+
+**Using Rest Operator**
+
+You can use the rest operator `(...)` to collect the remaining elements into a new array.
+
+```javascript
+const [a, ...rest] = [1, 2, 3, 4];
+console.log(a); // 1
+console.log(rest); // [2, 3, 4]
+```
+
+### Destructuring Objects
+Object destructuring allows you to unpack properties from objects into distinct variables.
+
+Basic Syntax
+```javascript
+const { name, age } = { name: 'John', age: 30 };
+console.log(name); // John
+console.log(age); // 30
+```
+
+**Renaming Variables**
+
+You can rename variables while destructuring by using a colon `(:)`.
+
+```javascript
+const { name: fullName, age: years } = { name: 'John', age: 30 };
+console.log(fullName); // John
+console.log(years); // 30
+```
+
+**Default Values**
+
+You can provide default values if the property does not exist in the object.
+
+```javascript
+const { name, age = 25 } = { name: 'John' };
+console.log(name); // John
+console.log(age); // 25
+```
+
+**Nested Destructuring**
+
+You can destructure nested objects.
+
+```javascript
+const person = { name: 'John', address: { city: 'New York', zip: 10001 } };
+const { name, address: { city, zip } } = person;
+console.log(name); // John
+console.log(city); // New York
+console.log(zip); // 10001
+```
+
+**Using Rest Operator**
+
+You can use the rest operator to collect the remaining properties into a new object.
+
+```javascript
+const { name, ...rest } = { name: 'John', age: 30, city: 'New York' };
+console.log(name); // John
+console.log(rest); // { age: 30, city: 'New York' }
+```
+
+### Destructuring Function Parameters
+You can destructure arrays and objects directly in function parameters.
+
+**Array Destructuring in Function Parameters**
+
+```javascript
+function sum([a, b]) {
+  return a + b;
+}
+console.log(sum([1, 2])); // 3
+```
+
+**Object Destructuring in Function Parameters**
+
+```javascript
+function greet({ name, age }) {
+  return `Hello, my name is ${name} and I am ${age} years old.`;
+}
+console.log(greet({ name: 'John', age: 30 })); // Hello, my name is John and I am 30 years old.
+```
 
 ## 5. Inheritance
 
@@ -806,6 +918,64 @@ There are three ways to create prototype inheritance in js
 Code sample - https://github.com/ColorCode/js-10-things/blob/main/1-inheritance/example.js
 
 ### Class inheritance
+
+Class inheritance in JavaScript is a mechanism that allows one class to inherit properties and methods from another class.
+
+Inheritance enables the creation of new classes based on existing classes, where the new class `(subclass or derived class)` inherits the properties and methods of the existing class `(superclass or base class)`.
+
+JavaScript uses the `extends` keyword to establish an inheritance relationship between two classes, and the `super` keyword to call the constructor and methods of the superclass
+
+```javascript
+// Superclass
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+
+  speak() {
+    console.log(`${this.name} makes a noise.`);
+  }
+}
+
+// Subclass
+class Dog extends Animal {
+  constructor(name, breed) {
+    super(name); // Call the superclass constructor
+    this.breed = breed;
+  }
+
+  speak() {
+    console.log(`${this.name} barks.`);
+  }
+
+  getBreed() {
+    console.log(`${this.name} is a ${this.breed}.`);
+  }
+}
+
+const myDog = new Dog('Rex', 'German Shepherd');
+myDog.speak();  // Rex barks.
+myDog.getBreed(); // Rex is a German Shepherd.
+
+```
+
+**Superclass**
+
+A superclass `(or base class)` is a class that is being inherited by another class. In the example above, `Animal` is the superclass. It contains a constructor to initialize the name property and a method speak().
+
+
+**Subclass**
+
+A subclass `(or derived class)` is a class that inherits from another class. In the example above, the `Dog` is the subclass inherited from the `Animal`. It uses the `extends` keyword to establish the inheritance.
+
+**The `super` Keyword**
+
+The `super` keyword is used within a subclass to call the constructor and methods of its superclass. This is necessary to initialize the inherited properties and allows the subclass to build upon the functionality of the superclass.
+
+**Overriding Methods**
+
+Subclasses can override methods from the superclass to provide specific implementations. In the example, the `speak()` method in `Dog` overrides the `speak()` method in `Animal`.
+
 
 ## 6. Spread and rest operator
 
