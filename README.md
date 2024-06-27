@@ -1,4 +1,4 @@
-# javascript-guide
+# javascript-programming-language
 
 Javascript programming language guidelines/notebook
 
