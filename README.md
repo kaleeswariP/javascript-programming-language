@@ -157,7 +157,7 @@ A function declaration defines a named function using the `function` keyword.
 
 Function declarations are hoisted, which means they can be called before they are defined in the code.
 
-**Hoisting:** Function declarations are hoisted to the top of their scope, so they can be called before they are defined. Refer - [Hoisting]()
+**Hoisting:** Function declarations are hoisted to the top of their scope, so they can be called before they are defined. Refer - [Hoisting](https://github.com/kaleeswariP/javascript-guide/edit/master/README.md#8-hoisting)
 **Named Functions:** Function declarations must have a name.
 **Can be Recursive:** Named functions can call themselves recursively.
 
@@ -234,6 +234,9 @@ arrowFunction(1, 2, 3);   // ReferenceError: arguments is not defined
 };
 console.log(user.greet()); // Hello, Alice
 ```
+Ways to Loop through objects.
+![Loop through objects](https://github.com/kaleeswariP/javascript-guide/assets/22699303/b6fa943e-251a-4358-9f50-c64dd9b3a8dc)
+
 * **Arrays:** Ordered collections of values.
 
 ```javascript
@@ -281,6 +284,11 @@ A string is a sequence of characters used to represent text. Strings are one of 
 
 **String Methods:** JavaScript provides a variety of built-in methods to manipulate strings, such as toUpperCase(), toLowerCase(), charAt(), substring(), slice(), indexOf(), replace(), trim(), split(), etc.<br>
 
+Image representations
+
+![string methods js](https://github.com/kaleeswariP/javascript-guide/assets/22699303/afeb40f6-70e7-431e-88db-638b99d79e9b)
+
+
 **Template Literals:** Introduced in ES6, template literals allow for more flexible string formatting and interpolation(process of inserting something into something else) using backticks `() and ${}` placeholders.<br>
 
 Refer - [string related tasks](https://github.com/kaleeswariP/javascript-guide/edit/master/README.md#6-string-related-tasks)
@@ -312,7 +320,6 @@ Refer - [Date related tasks]()
 
 ### **Formatting Dates:**
 `toDateString(), toISOString(), toLocaleDateString(), toLocaleString(), toLocaleTimeString(), toString(), toTimeString(), toUTCString()`: These methods convert a Date object to various string representations according to different formatting rules and locales.
-
 
 
 ## Dom Manuipulation APIs
@@ -555,6 +562,10 @@ Session Cookies - Session cookies are deleted when the browser is closed because
 
 # Advanced Topics
 
+## Event Loop, Microtasks, Macrotasks
+
+## Events: DOMContentLoaded, load, beforeunload, unload 
+
 ## Polyfills
 (Mostly asked polyfills: `Promise`, `Promise.all`, `Promise.any`, `Promise.race`, `Promise.allSettled`, `call`, `apply`, `bind`, `map`, `reduce`, `filter`, `forEach`, `flat`, `fetch API`)
 ## Memoization
@@ -571,6 +582,11 @@ Session Cookies - Session cookies are deleted when the browser is closed because
 * Abstract Factory
 * Builder
 * Prototype
+* Provider
+* Prototype
+* Observer
+* Module
+* HOC
 
 **Structural Patterns**
 * Adapter
@@ -713,6 +729,86 @@ Function curation is the process of taking a function with multiple arguments an
 
 
 ## 3. IIFE
+An IIFE (Immediately Invoked Function Expression) is a JavaScript function that is executed right after it is defined.
+
+It is used to create a local scope for variables and functions, preventing them from polluting the global namespace.
+
+This is particularly useful for encapsulating code, creating private variables and methods, and implementing the module pattern. IIFEs can accept parameters, return values, and help in organizing and structuring code in a clean and modular way.
+
+Example:
+
+```javascript
+(function() {
+  // code here
+})();
+```
+
+**Encapsulation:** IIFEs help in creating a local scope for variables and functions, thus preventing them from polluting the global namespace.
+
+**Avoid Global Namespace Pollution:** By using IIFEs, you can avoid defining too many global variables and functions.
+
+**Private Variables and Methods:** IIFEs can be used to create private variables and methods.
+
+```javascript
+var counter = (function() {
+  var count = 0; // private variable
+
+  return {
+    increment: function() {
+      count += 1;
+      return count;
+    },
+    reset: function() {
+      count = 0;
+      return count;
+    }
+  };
+})();
+
+console.log(counter.increment()); // 1
+console.log(counter.increment()); // 2
+console.log(counter.reset()); // 0
+```
+
+**Module Pattern:** IIFEs are often used in the module pattern to create modules with private and public methods.
+
+```javascript
+var myModule = (function() {
+  var privateVar = "I am private";
+
+  function privateMethod() {
+    console.log(privateVar);
+  }
+
+  return {
+    publicMethod: function() {
+      privateMethod();
+    }
+  };
+})();
+
+myModule.publicMethod(); // I am private
+```
+**Module Pattern:**
+IIFEs are often used in the module pattern to create modules with private and public methods.
+```javascript
+var myModule = (function() {
+  var privateVar = "I am private";
+
+  function privateMethod() {
+    console.log(privateVar);
+  }
+
+  return {
+    publicMethod: function() {
+      privateMethod();
+    }
+  };
+})();
+
+myModule.publicMethod(); // I am private
+```
+
 
 ## 4. Destructuring 
 
@@ -765,9 +861,16 @@ async function convert() {
 convert();
 
 ```
-
-## 8. Hoisting 
-## 9. Call by value and call by difference
+## 8. Debouncing and Throttling 
+## 9. Event Propagation, Event Bubbling, Capturing, and Delegation
+## 10. setTimeout, setInterval 
+## 11. High Order Functions 
+## 12. Call, Apply, Bind 
+## 13. Hoisting and Temporal dead zone
+## 14. Call by value and call by the difference
+## 15. Execution Context
+## 16. Callstack
+## 17.
 
 
 # Coding challenges
