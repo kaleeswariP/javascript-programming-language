@@ -29,7 +29,7 @@ Javascript programming language guidelines/notebook
   * [Dates Handling](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#dates-handling)
   * [Map and Set](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#map-and-set)
       * [Map](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#map)
-      * [WeekMap]https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#weekmap()
+      * [WeekMap](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#weekmap)
       * [Set](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#set)
       * [WeekSet](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#weekset)
   * [DOM Manipulation APIs](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#dates-handling)
@@ -1444,15 +1444,141 @@ convert();
 
 ```
 ## 8. Debouncing and Throttling 
+### Debouncing
+Debouncing ensures that a function is only called after a certain period has passed since it was last called. 
+
+If the event is triggered again within that period, the timer is reset.
+
+**Example use case:** A search input field where the search function should only be called after the user has stopped typing for a specified period.
+
+### Throttling
+Throttling ensures that a function is called at most once in a specified period. 
+
+Unlike debouncing, throttling ensures that the function is executed at regular intervals, regardless of how many times the event is triggered.
+
+**Example use case:** Handling window resize events where the resize handler should only be called once every 100 milliseconds.
+
+
 ## 9. Event Propagation, Event Bubbling, Capturing, and Delegation
+
+*In JavaScript, <br>
+event propagation refers to the way events travel through the Document Object Model (DOM) hierarchy. <br>
+This process involves two main phases: capturing and bubbling. <br>
+Event delegation is a technique that leverages these phases to handle events more efficiently.<br>* 
+
+### Event Propagation
+Event propagation describes the order in which events are handled in the DOM.
+
+1. Capturing Phase (Capture Phase):
+
+The event starts at the root of the DOM tree and travels down to the target element.
+During this phase, event listeners set for capturing can handle the event.
+
+2. Target Phase:
+
+The event reaches the target element, where it originated.
+Event listeners on the target element can handle the event.
+
+3. Bubbling Phase:
+
+After reaching the target, the event travels back up the DOM tree to the root.
+During this phase, event listeners set for bubbling can handle the event.
+
+### Event bubbling
+Event bubbling refers to the process of the event traveling from the target element up through its ancestors. It allows higher-level elements to react to events fired on their descendants.
+```javascript
+document.getElementById('child').addEventListener('click', () => {
+  console.log('Child clicked');
+});
+
+document.getElementById('parent').addEventListener('click', () => {
+  console.log('Parent clicked');
+});
+
+```
+### Event Capturing
+Event capturing is the opposite of event bubbling. The event travels from the root to the target element. To handle an event during the capturing phase, you need to set the `useCapture` parameter to `true` when adding the event listener.
+
+```javascript
+document.getElementById('child').addEventListener('click', () => {
+  console.log('Child clicked');
+}, true);
+
+document.getElementById('parent').addEventListener('click', () => {
+  console.log('Parent clicked');
+}, true);
+
+// If you click on the child element, 'Parent clicked' will be logged before 'Child clicked', because the event is captured first by the parent.
+
+```
+
+### Event Delegation
+
+Event delegation is a technique that involves using a single event listener to manage all events of a particular type for multiple child elements. 
+
+This is particularly useful for managing events in a dynamic list of items, as it avoids the need to attach individual event listeners to each item.
+
+By leveraging event bubbling, you can place a single event listener on a common ancestor and handle events for all its descendants.
+
+```javascript
+document.getElementById('parent').addEventListener('click', (event) => {
+  if (event.target && event.target.matches('li')) {
+    console.log('List item clicked:', event.target);
+  }
+});
+
+//Here, a single-click event listener is added to the parent element. When any li element inside the parent is clicked, the event bubbles up to the parent, where it is handled.
+
+```
+
 ## 10. setTimeout, setInterval 
 ## 11. High Order Functions 
 ## 12. Call, Apply, Bind 
 ## 13. Hoisting and Temporal dead zone
+### Hiosting
+Hoisting is a JavaScript mechanism where variables, function declarations, and classes are moved to the top of their containing scope during the compile phase. This means that you can use variables and functions before you declare them in your code.
+
+With `var`, the declaration is hoisted but not the initialization. The variable is set to undefined until the line of code where it is initialized.
+
+With `let` and `const`, the declarations are hoisted, but they are not initialized. Accessing them before the declaration results in a ReferenceError.
+
+Function declarations are fully hoisted, meaning both the function name and the function body are hoisted.
+
+Function expressions and arrow functions are not hoisted.
+
+### Temporal Dead zone
+
+The Temporal Dead Zone (TDZ) refers to the period between the entering of a scope `(like a block or function)` and the point at which a variable declared with `let` or `const` is initialized. During this period, accessing the variable will result in a `ReferenceError`.
+
+
 ## 14. Call by value and call by the difference
 ## 15. Execution Context
 ## 16. Callstack
-## 17.
+## 17. How asynchronous functions work inside the loop
+
+1. Using `for...of` with `await`.
+2. Using `Promise.all` for parallel execution: If the order of execution is not important and you want to run async calls in parallel.
+3. Using `forEach` with async functions: `forEach` does not work well with `async/await` because it does not wait for the completion of the async operations. However, you can use it if you handle the promises appropriately.
+4. Using reduce to handle async calls sequentially.
+5. Using traditional for loop with await
+
+Example:
+
+```javascript
+const asyncFunction = async (item) => {
+  // Your async code here
+};
+
+const processArray = async (array) => {
+  await array.reduce(async (promise, item) => {
+    await promise;
+    await asyncFunction(item);
+  }, Promise.resolve());
+};
+
+processArray([1, 2, 3, 4, 5]);
+
+```
 
 
 
