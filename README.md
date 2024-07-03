@@ -2,6 +2,95 @@
 
 Javascript programming language guidelines/notebook
 
+**Javascript core basic**<br>
+
+  * [Variables and Data Types](https://github.com/kaleeswariP/javascript-guide/edit/master/README.md#variables-and-data-types)
+      * [Variables](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#variables)
+      * [Data types](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#data-types)
+  * [Operators](https://github.com/kaleeswariP/javascript-guide#operators)
+  * [Control Structures](https://github.com/kaleeswariP/javascript-guide/edit/master/README.md#control-structures)
+      * [Conditionals](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#conditionals)
+      * [`for ...in` loop](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#for-in-loop)
+      * [`for ...of` loop](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#for-of-loop)
+      * [`foreach`]()
+      * [control statements - break, continue](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#loop-breaking-statements)
+  * [Functions](https://github.com/kaleeswariP/javascript-guide#functions)
+      * [Function declaration](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#function-declaration)
+      * [Function expression](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#function-expression)
+      * [Arrow functions](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#arrow-functionses6)
+  * [Objects and Arrays](https://github.com/kaleeswariP/javascript-guide#objects-and-arrays)
+      * [Objects]()
+      * [Arrays]()
+  * [Asynchronous javascripts](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#asynchronous-javascript)
+      * [Callback](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#callbacks)
+      * [Promise]()
+      * [Async-await]() 
+  * [Strings](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#strings)
+  * [Dates Handling](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#dates-handling)
+  * [Map and Set](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#map-and-set)
+      * [Map](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#map)
+      * [WeekMap]https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#weekmap()
+      * [Set](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#set)
+      * [WeekSet](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#weekset)
+  * [DOM Manipulation APIs](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#dates-handling)
+  * [Web storage in JS](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#web-storage-in-js)
+      * [Local storage](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#local-storage)
+      * [Session storage](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#session-storage)
+      * [Cookies](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#cookie)
+
+**Working of JS Engine**<br>
+
+* [Working of JS Engine](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#working-of-js-engine)
+
+**Advanced Topics**<br>
+
+* [Event Loop, Microtasks, Macrotasks](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#event-loop-microtasks-macrotasks)
+* [Events: DOMContentLoaded, load, beforeunload, unload](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#events-domcontentloaded-load-beforeunload-unload)
+* [Polyfilles](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#polyfills)
+* [Memoization](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#memoization)
+* [Generator Functions](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#generator-functions)
+* [Web APIs](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#web-apis)
+* [Design Patterns](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#design-patterns)
+
+
+**Coding Concepts**<br>
+
+ * [Currying](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#1-currying)
+ * [Closures](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#2-closures)
+    * [Factory functions](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#factory-functions)
+    * [Dynamic function generation](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#dynamic-function-generation)
+ * [IIFE](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#3-iife)
+ * [Destructuring](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#4-destructuring)
+ * [Inheritance](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#5-inheritance)
+   * [Prototype inheritance](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#5-inheritance)
+   * [Class inheritance](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#class-inheritance)
+ * [Spread and Rest operator](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#6-spread-and-rest-operator)
+ * [Callback, Promises, and Async Await](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#7-callback-promises-and-async-await)
+ * [Debouncing and Throttling](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#8-debouncing-and-throttling)
+ * [Event Propagation, Event Bubbling, Capturing, and Delegation](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#9-event-propagation-event-bubbling-capturing-and-delegation)
+ * [setTimeout, setInterval](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#10-settimeout-setinterval)
+ * [High Order Functions](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#11-high-order-functions)
+     * [First order functions]()
+     * [Pure functions]()
+ * [Call, Apply, Bind](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#12-call-apply-bind)
+ * [Hoisting and Temporal dead zone](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#13-hoisting-and-temporal-dead-zone)
+ * [Call by value and call by the difference](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#14-call-by-value-and-call-by-the-difference)
+ * [Execution Context](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#15-execution-context)
+ * [Callstack](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#16-callstack)
+ * [How asynchronous functions work inside loops](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#2-swap-the-two-variables-values-without-using-the-temporary-variable)
+
+
+**Javascript coding practices/Challenges**<br>
+
+* [What is the output of the snippet below](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#1-what-is-the-output-of-the-snippet-below)
+* [Swap the two variables' values without using the temporary variable]()
+
+**Javascript Real-time code snippets**<br>
+
+
+
+
+
 # Javascript Core Basics
   * [Variables and Data Types](https://github.com/kaleeswariP/javascript-guide/edit/master/README.md#variables-and-data-types)
       * [Variables](https://github.com/kaleeswariP/javascript-guide?tab=readme-ov-file#variables)
@@ -135,6 +224,10 @@ for (let key in person) {
 }
 
 ```
+
+#### `forEach` loop
+
+
 
 ### Loop-breaking statements
 loop breaking statements are used to alter the flow of loop iterations.
@@ -776,7 +869,14 @@ Session Cookies - Session cookies are deleted when the browser is closed because
 ![image](https://github.com/kaleeswariP/javascript-guide/assets/22699303/930dc92e-07f6-4e86-a02c-3c957e5fb8c7)
 
 # Advanced Topics
-  *[Event Loop, Microtasks, Macrotasks]
+
+* [Event Loop, Microtasks, Macrotasks](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#event-loop-microtasks-macrotasks)
+* [Events: DOMContentLoaded, load, beforeunload, unload](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#events-domcontentloaded-load-beforeunload-unload)
+* [Polyfilles](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#polyfills)
+* [Memoization](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#memoization)
+* [Generator Functions](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#generator-functions)
+* [Web APIs](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#web-apis)
+* [Design Patterns](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#design-patterns)
 
 ## Event Loop, Microtasks, Macrotasks
 
@@ -813,6 +913,31 @@ Session Cookies - Session cookies are deleted when the browser is closed because
 ##  Working of JS Engine 
 
 # Coding concepts
+
+ * [Currying](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#1-currying)
+ * [Closures](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#2-closures)
+    * [Factory functions](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#factory-functions)
+    * [Dynamic function generation](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#dynamic-function-generation)
+ * [IIFE](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#3-iife)
+ * [Destructuring](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#4-destructuring)
+ * [Inheritance](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#5-inheritance)
+   * [Prototype inheritance](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#5-inheritance)
+   * [Class inheritance](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#class-inheritance)
+ * [Spread and Rest operator](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#6-spread-and-rest-operator)
+ * [Callback, Promises, and Async Await](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#7-callback-promises-and-async-await)
+ * [Debouncing and Throttling](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#8-debouncing-and-throttling)
+ * [Event Propagation, Event Bubbling, Capturing, and Delegation](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#9-event-propagation-event-bubbling-capturing-and-delegation)
+ * [setTimeout, setInterval](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#10-settimeout-setinterval)
+ * [High Order Functions](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#11-high-order-functions)
+     * [First order functions]()
+     * [Pure functions]()
+ * [Call, Apply, Bind](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#12-call-apply-bind)
+ * [Hoisting and Temporal dead zone](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#13-hoisting-and-temporal-dead-zone)
+ * [Call by value and call by the difference](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#14-call-by-value-and-call-by-the-difference)
+ * [Execution Context](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#15-execution-context)
+ * [Callstack](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#16-callstack)
+ * [How asynchronous functions work inside loops](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#2-swap-the-two-variables-values-without-using-the-temporary-variable)
+ * 
 ## 1. Currying
 ### Definition:
 Currying is a fundamental concept in JavaScript that involves transforming a function with multiple arguments into a series of functions, each taking a single argument.
@@ -1328,6 +1453,7 @@ convert();
 ## 15. Execution Context
 ## 16. Callstack
 ## 17.
+
 
 
 # Coding challenges
