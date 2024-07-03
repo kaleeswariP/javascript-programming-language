@@ -1337,7 +1337,7 @@ The JavaScript for-in statement loops through the properties of an Object:
 
 ```javascript
 let language = [ 'python', 'javascript'];
-let obj = {..language};
+let obj = {...language};
 
 console.log('2' in language);
 console.log('javascript' in obj);
@@ -1432,6 +1432,36 @@ console.log(removeVowels('hello world'));
 const contains = (str, subString) => str.includes(subString);
 console.log(contains('hello world', 'll'));
 ```
+###  Write a JavaScript program to convert a string to a title case (capitalize the first letter of each word). 
+
+```javascript
+function titleCase(str) {
+    return str.toLowerCase().split(' ').map(function (word) {
+        return (word.charAt(0).toUpperCase() + word.slice(1));
+    }).join(' ');
+}
+console.log(titleCase("converting string to titlecase"));
+```
+### Write a function that determines if two strings are anagrams of each other.
+An anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+```javascript
+function areAnagrams(str1, str2) { 
+  return str1.split("").sort().join("") === str2.split("").sort().join(""); 
+} 
+```
+### Implement a function to reverse a string without using the built-in reverse() method.
+```javascript
+function reverseString(str) { 
+  let reversed = "; 
+  for (let i = str.length - 1; i >= 0; i--) { 
+    reversed += str[i]; 
+  } 
+  return reversed; 
+} 
+```
+
+
 ## 6. Array Related tasks
 ### Sorting an array
 ```javascript
@@ -1453,27 +1483,122 @@ console.log(take([1,2,3,4,5,6],3));
 const isArrayEmpty = arr => Array.isArray(arr) && arr.length > 0;
 console.log(isArrayEmpty([1,2,3,4,5,6]));
 ```
-### Find max/min values in array
+### Find max/min values in an array
 ```javascript
 Math.max(...array);
 Math.min(...array);
 ```
+### Implement a function to find the sum of all the numbers in an array. 
+Using reduce() method.
+```javascript
+function findSum(arr) { 
+  return arr.reduce((sum, num) => sum + num, 0); 
+} 
+```
+
+
+
+
 ## 7. Find the domain name from an email
 ```javascript
 const extractDomain = mail => mail.split('@')[1];
 
 console.log(extractDomain('kaleewaripss96@gmail.com'));
 ```
-## 8. Flatten an nested array
-```javascript
-const extractDomain = mail => mail.split('@')[1];
+## 8. Flatten a nested array
 
-console.log(extractDomain('kaleewaripss96@gmail.com'));
+The flat() method is a built-in JavaScript method that flattens the input array into a new array. This method takes an optional depth parameter, which defines the depth level specifying how deep a nested array structure should be flattened.
+
+```javascript
+// using flat() method
+
+let nestedArray = [1, [2, 3], [4, [5, 6]], 7];
+let flatArray = nestedArray.flat(2);
+console.log(flatArray); // [1, 2, 3, 4, 5, 6, 7];
+
+// using recursion
+
+function flattenArray(array) {
+  return array.reduce((accumulator, value) => 
+    Array.isArray(value)? accumulator.concat(flattenArray(value)) : accumulator.concat(value), []);
+}
+let nestedArray = [1, [2, 3], [4, [5, 6]], 7];
+let flatArray = flattenArray(nestedArray);
+
+console.log(flatArray); // [1, 2, 3, 4, 5, 6, 7]
 ```
+
+## 9. Please find the key value in the nested object, if exists return its values else return undefined
+
+```javascript
+const obj ={
+  foo: { bar: { biz: 'hello', a: 10 }, w: 1000 },
+  sap: {},
+  ss: 'welcome'
+}
+
+const deepGet = (obj, key = 'foo.bar.biz') => {
+    let input = key.split('.');
+    let output = input.reduce((acc, val, index) => {
+      return acc?.[val] ?? null;
+    },obj);
+    
+    return output;
+};
+
+console.log(deepGet(obj));
+deepGet(data, ['foo', 'foz', 2]); // 3
+deepGet(data, ['foo', 'bar', 'baz', 8, 'foz']); // null
+```
+
+## 10. Write a javascript program to calculate the factorial of a given number.
+
+A factorial number is the product of all positive integers equal to or less than the given number.  
+
+The multiplication of all positive integers say “n”, that will be smaller than or equivalent to n is known as the factorial.
+
+```javascript
+function factorial(number) { 
+  if (number === 0 || number === 1) { 
+    return 1; 
+  } else { 
+    return number * factorial(number - 1); 
+  } 
+} 
+// OR
+function factorial(num) { 
+  if (num <= 1) return 1; 
+  return num * factorial(num - 1); 
+} 
+```
+
+## 11. Write a JavaScript function to check if a given number is prime.
+To check if a given number is prime, loop from 2 to the square root of the number. If any integer evenly divides it, the number is not prime. 
+
+```javascript
+function isPrime(num) { 
+  if (num <= 1) return false; 
+  for (let i = 2; i <= Math.sqrt(num); i++) { 
+    if (num % i === 0) return false; 
+  } 
+  return true; 
+} 
+```
+## 12. Find the brackets that match the string in javascript. if the input string is “ad(dfd[0]) {d}” then the output should be 1 and count of brackets and if the input string is “ad(dfd[0) {d” then the output should be 0.
+
+[Hint for the solution](https://medium.com/analytics-vidhya/javascript-check-valid-parentheses-with-a-stack-bc7b1bab26c2#:~:text=Loop%20through%20each%20element%20in,keep%20iterating%20through%20the%20string)
+
+## 13. Write a program to print all the LEADERS in the array. An element is a leader if it is greater than all the elements to its right side. And the rightmost element is always a leader. 
+
+For example:
+
+Input: arr[] = {16, 17, 4, 3, 5, 2}, 
+Output: 17, 5, 2
+
 
 # Real-time coding snippets for the project
 ## 1. Generate random string
-We can use `Math.random()` to generate a random string, It very convenient to generate a unique ID
+We can use `Math.random()` to generate a random string, It is very convenient to generate a unique ID
 
 ```javascript
 const randomString = () => Math.random().toString(36).slice(2);
@@ -1594,11 +1719,14 @@ const capitialise = str => str.charAt(0).toUpperCase() + str.slice(1);
 
 console.log(capitialise('hello world'));
 ```
-## 11. Generate a random number between two values
+## 11. Write a JavaScript function that takes an array of numbers and returns a new array with only the even numbers.
 ```javascript
-// Returns a random number between the min and max variable's values
-const randomNumber = Math.random() * (max - min) + min;
-```## 11. Generate a random number between two values
+function filterEvenNumbers(numbers) { 
+  return numbers.filter(num => num % 2 === 0); 
+}
+```
+
+## 11. Generate a random number between two values
 ```javascript
 // Returns a random number between the min and max variable's values
 const randomNumber = Math.random() * (max - min) + min;
