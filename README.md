@@ -1532,6 +1532,50 @@ document.getElementById('parent').addEventListener('click', (event) => {
 ```
 
 ## 10. setTimeout, setInterval 
+setTimeout and setInterval are two essential functions in JavaScript for working with timers. They allow you to execute code after a delay `(setTimeout)` or repeatedly at specified intervals `(setInterval)`. 
+
+**`setTimeout`**
+
+The `setTimeout` function executes a specified function once after a given delay (in milliseconds).
+```javascript
+let timeoutID = setTimeout(function, delay, arg1, arg2, ...);
+
+//example
+function sayHello() {
+  console.log('Hello, World!');
+}
+
+// Execute sayHello after 2 seconds (2000 milliseconds)
+let timeoutID = setTimeout(sayHello, 2000);
+
+// If needed, clear the timeout before it executes
+clearTimeout(timeoutID);
+
+```
+
+**`setInterval`**
+
+The `setInterval` function repeatedly executes a specified function at fixed intervals (in milliseconds).
+
+```javascript
+let intervalID = setInterval(function, delay, arg1, arg2, ...);
+
+//example
+function sayHello() {
+  console.log('Hello, World!');
+}
+
+// Execute sayHello every 2 seconds (2000 milliseconds)
+let intervalID = setInterval(sayHello, 2000);
+
+// If needed, clear the interval to stop the repeated execution
+clearInterval(intervalID);
+
+```
+
+setTimeout: Use clearTimeout(timeoutID) to prevent the function from being executed.
+`setInterval`: Use `clearInterval(intervalID)` to stop the repeated execution.
+
 ## 11. High Order Functions 
 ## 12. Call, Apply, Bind 
 ## 13. Hoisting and Temporal dead zone
