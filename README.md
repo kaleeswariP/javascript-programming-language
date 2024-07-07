@@ -49,6 +49,7 @@ Javascript programming language guidelines/notebook
 * [Polyfilles](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#polyfills)
 * [Memoization](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#memoization)
 * [Generator Functions](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#generator-functions)
+* [Iterator]()
 * [Web APIs](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#web-apis)
 * [Design Patterns](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#design-patterns)
 
@@ -879,38 +880,599 @@ Session Cookies - Session cookies are deleted when the browser is closed because
 * [Design Patterns](https://github.com/kaleeswariP/javascript-programming-language?tab=readme-ov-file#design-patterns)
 
 ## Event Loop, Microtasks, Macrotasks
+In Node.js, understanding the event loop, microtasks, and macro tasks (also known as task queues) is crucial for comprehending how asynchronous operations are handled. 
+
+### Event Loop
+The event loop is the mechanism that handles asynchronous operations in Node.js. It continuously checks the call stack and the callback queue, executing tasks from non-blocking queues. 
+The event loop has several phases, each handling different types of callbacks. These phases include:
+
+* Timers: Executes callbacks for setTimeout and setInterval.
+* I/O Callbacks: Executes callbacks for I/O operations, such as reading from a file.
+* Idle, Prepare: Internal use only.
+* Poll: Retrieves new I/O events; executes I/O-related callbacks (excluding timers, close callbacks, and setImmediate).
+* Check: Executes callbacks for setImmediate.
+* Close Callbacks: Executes callbacks for closed events, like when a socket closes.
+
+### Macrotasks (Task Queue)
+Macrotasks, or simply tasks, are scheduled in the task queue. This includes:
+
+* setTimeout
+* setInterval
+* setImmediate
+* I/O tasks
+* UI rendering (in browsers)
+
+### Microtasks (Microtask Queue)
+Microtasks, also known as the microtask queue, include:
+
+* `process.nextTick`
+* Promises `(and other mechanisms using `queueMicrotask`)`
+Microtasks are processed after the currently executing script and before the event loop continues to the next phase. This ensures that microtasks are handled immediately after the current operation is completed, giving them higher priority over macro tasks.
+
+### Execution order
+* Start the event loop.
+* Execute all tasks in the call stack.
+* Process the microtask queue:
+* Run all microtasks (e.g., resolved promises, process.nextTick).
+* Move to the next phase of the event loop.
+* Execute all callbacks in the appropriate phase (timers, I/O, etc.).
+* Repeat steps 2-5.
 
 ## Events: DOMContentLoaded, load, beforeunload, unload 
 
+In JavaScript, particularly in web development, the `DOMContentLoaded`, `load`, `beforeunload`, and `unload` events are crucial for managing the lifecycle of a web page.
+
+
+**`DOMContentLoaded`**<br>
+The `DOMContentLoaded` *event fires when the initial HTML document has been completely loaded and parsed, without waiting for stylesheets, images, and subframes to finish loading.* This event is useful if you want to run some JavaScript code as soon as the DOM is ready.
+
+
+**`load`**<br>
+The `load` *event fires when the whole page has loaded, including all dependent resources such as stylesheets, images, and iframes*. This event is useful when you need to ensure that everything on the page is fully loaded before executing your code.
+
+
+**`beforeunload`**<br>
+The `beforeunload` *event is fired when the window, the document, and its resources are about to be unloaded.* This event is typically used to show a confirmation dialog, asking the user if they are sure they want to leave the page. However, the exact implementation and appearance of this dialog are controlled by the browser, and not all browsers may honor the custom message.
+
+
+**`unload`**<br>
+The `unload` *event is fired when the document or a child resource is being unloaded.* This can happen, for example, when the user navigates away from the page. The unload event is not commonly used because it cannot reliably prevent the page from being unloaded.
+
+
+```javascript
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM fully loaded and parsed');
+});
+
+window.addEventListener('load', function() {
+  console.log('Page fully loaded');
+});
+
+window.addEventListener('beforeunload', function(event) {
+  event.preventDefault(); // Standard way to prevent default behavior
+  event.returnValue = ''; // Some browsers require this property to be set
+});
+
+window.addEventListener('unload', function() {
+  console.log('Page is unloading');
+});
+
+```
+
 ## Polyfills
 (Mostly asked polyfills: `Promise`, `Promise.all`, `Promise.any`, `Promise.race`, `Promise.allSettled`, `call`, `apply`, `bind`, `map`, `reduce`, `filter`, `forEach`, `flat`, `fetch API`)
+
+A polyfill is a piece of code (usually JavaScript) used to provide modern functionality on older browsers that do not natively support it.
+
+Polyfills emulate newer web standards in older environments, allowing developers to use modern features without worrying about compatibility issues across different browsers and versions.
+
+
+**How Polyfills Work**<br>
+Polyfills typically check if a feature is already available in the browser. If it is not, they define the functionality themselves. This conditional definition ensures that the polyfill does not overwrite native implementations if they exist.
+
+### `Array.prototype.includes` Polyfill
+The `Array.prototype.includes` method was introduced in ECMAScript 2016 (ES7). Older browsers like Internet Explorer do not support it. Here's a polyfill for this method:
+
+```javascript
+if (!Array.prototype.includes) {
+  Array.prototype.includes = function(element) {
+    return this.indexOf(element) !== -1;
+  };
+}
+
+```
+
+### `promise` Polyfill
+Promises are part of ECMAScript 2015 (ES6). A polyfill can implement this feature in environments where it is not available:
+
+```javascript
+if (typeof Promise === 'undefined') {
+  // Include a Promise polyfill library like `es6-promise`
+  (function() {
+    // Polyfill code here
+  })();
+}
+```
+
+### Using Polyfill Libraries
+There are many libraries available that provide polyfills for a wide range of features. Some popular ones include:
+
+* core-js: Provides polyfills for ECMAScript features.
+* babel-polyfill: Includes core-js and regenerator-runtime to emulate a full ES2015+ environment.
+* html5shiv: Adds HTML5 element support to older versions of Internet Explorer.
+* polyfill.io: A service that provides polyfills based on the user's browser.
+
+*To use a polyfill, you can include the polyfill script in your HTML file before your main JavaScript code.*
+
+*Alternatively, you can install polyfills using npm and include them in your build process if you are using a module bundler like Webpack*
+
+
 ## Memoization
+Memoization is a programming technique used to optimize the performance of functions by caching the results of expensive function calls and returning the cached result when the same inputs occur again.
+This can significantly improve the efficiency of functions that are called repeatedly with the same arguments.
+
+### How Memoization Works
+
+* Cache Initialization: Create a cache (usually an object or a map) to store the results of function calls.
+* Cache Check: When the memoized function is called, first check if the result for the given inputs is already in the cache.
+* Return Cached Result: If the result is in the cache, return it immediately.
+* Compute and Cache Result: If the result is not in the cache, compute it, store it in the cache, and then return it.
+
+Example: Fibonacci Sequence
+```javascript
+
+function memoize(fn) {
+  const cache = {};
+  return function(...args) {
+    const key = JSON.stringify(args);
+    if (cache[key]) {
+      return cache[key];
+    }
+    const result = fn(...args);
+    cache[key] = result;
+    return result;
+  };
+}
+
+function fib(n) {
+  if (n <= 1) {
+    return n;
+  }
+  return fib(n - 1) + fib(n - 2);
+}
+
+const memoizedFib = memoize(fib);
+
+console.log(memoizedFib(40)); // Computed and cached
+console.log(memoizedFib(40)); // Retrieved from cache
+
+```
+
 
 ## Generator Functions
+Generator functions in JavaScript are a special class of functions that can be paused and resumed, allowing for the generation of a sequence of values over time, instead of computing all values at once and sending them back.
+
+A generator function is defined using the `function*` syntax, and it uses the `yield` keyword to pause execution and produce a value.
+```javascript
+function* generatorFunction() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+```
+* Function Declaration: The function* syntax is used to declare a generator function.
+* Yield: The yield keyword is used to pause the function and return a value.
+* Iterator: Calling a generator function returns an iterator object.
+
+
+`next()` Method
+The iterator object returned by a generator function has a `next()` method. This method resumes the execution of the generator function and returns an object with two properties:
+ * value: The value yielded by the yield expression.
+ * done: A boolean indicating whether the generator has been completed.
+
+Example with a Loop
+```javascript
+function* idMaker() {
+  let id = 1;
+  while (true) {
+    yield id++;
+  }
+}
+
+const gen = idMaker();
+
+console.log(gen.next().value); // 1
+console.log(gen.next().value); // 2
+console.log(gen.next().value); // 3
+```
+
+Asynchronous Generators
+With the introduction of ES2018, JavaScript supports asynchronous generators, which can yield promises and work with the `for await...of` loop:
+
+```javascript
+async function* asyncGenerator() {
+  let i = 0;
+  while (i < 3) {
+    yield new Promise(resolve => setTimeout(() => resolve(i++), 1000));
+  }
+}
+
+(async () => {
+  for await (let num of asyncGenerator()) {
+    console.log(num); // 0, 1, 2 (with a 1-second delay between each)
+  }
+})();
+
+```
+
+### Use Cases
+
+1. Iterators and Iteration Protocols
+
+Generators provide an easy way to create custom iterators. This is useful when you need to iterate over complex data structures or generate values on the fly.
+
+```javascript
+function* customIterator(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    yield arr[i];
+  }
+}
+
+const iterator = customIterator([1, 2, 3, 4, 5]);
+for (const value of iterator) {
+  console.log(value); // 1, 2, 3, 4, 5
+}
+
+```
+2. Asynchronous Programming
+3. Lazy Evaluation: Generators can be used to implement lazy evaluation, where values are computed only when needed.
+4. State Machines: Generators can be used to implement state machines, where each state can yield to the next state. This can make the code for state transitions more readable and maintainable.
+5. Infinite Scrolling or Pagination
+Generators can handle data fetching in chunks, which is useful for implementing features like infinite scrolling or pagination in web applications.
+
+```javascript
+function* fetchPages(url) {
+  let page = 1;
+  while (true) {
+    const data = yield fetch(`${url}?page=${page}`).then(res => res.json());
+    page++;
+    if (!data || data.length === 0) break;
+  }
+}
+
+const pageFetcher = fetchPages('https://api.example.com/data');
+
+async function loadMore() {
+  const { value, done } = await pageFetcher.next();
+  if (!done) {
+    console.log(value);
+    // Render data and load more if necessary
+  }
+}
+
+loadMore();
+
+```
+6. Pausing and Resuming Execution
+7. Combinatorial Generation
+
+## Iterators
+
+In JavaScript, an iterator is an object that allows you to traverse through a collection of items, one at a time.
+
+ The iterator protocol defines a standard way for objects to produce a sequence of values. 
+ 
+ An object becomes an iterator by implementing a `next` method that returns an object with two properties: `value` and `done`.
+
+**Iterator Protocol**<br><br>
+To be an iterator, an object must implement the following method:
+
+next(): A method that returns an object with two properties:
+ * value: The next value in the iteration sequence.
+ * done: A boolean indicating whether the sequence is complete.
+
+```javascript
+function createIterator(arr) {
+  let index = 0;
+  return {
+    next: function() {
+      if (index < arr.length) {
+        return { value: arr[index++], done: false };
+      } else {
+        return { value: undefined, done: true };
+      }
+    }
+  };
+}
+
+const iterator = createIterator([1, 2, 3]);
+
+console.log(iterator.next()); // { value: 1, done: false }
+console.log(iterator.next()); // { value: 2, done: false }
+console.log(iterator.next()); // { value: 3, done: false }
+console.log(iterator.next()); // { value: undefined, done: true }
+
+```
+
+**Iterable Protocol**<br>
+An object is considered iterable if it implements the `@@iterator` method, which is available via the `[Symbol.iterator]` key. This method should return an iterator.
+
+**Built-in Iterables**<br>
+Several built-in objects in JavaScript are iterable by default, including:
+
+* Arrays
+* Strings
+* Maps
+* Sets
+* Typed arrays
+* The `arguments` object
+
+**Custom Iterators with Generators**<br>
+Generators provide a simpler way to create custom iterators. The `function*` syntax is used to define a generator function, which automatically implements the iterable protocol.
+
 
 ## Web APIs
+JavaScript has access to a wide range of Web APIs that allow it to interact with the browser and other services. 
+
+These APIs enable functionalities such as manipulating the DOM, making network requests, storing data locally, accessing device hardware, and much more. 
+
+* **DOM (Document Object Model) APIs:** Allows access to the HTML document structure and elements,  provides methods for manipulating HTML elements,  and Manages events and event handling
+* **Fetch API:**  Provides a modern way to make network requests.
+* **Storage APIs:** local storage, session storage and indexedDB.
+* **Geolocation API:** Retrieves the geographical location of the user's device.
+* **Canvas API:** Used for drawing graphics via JavaScript
+* **Web Storage API:** Local storage and session storage.
+* **WebSockets API:** Provides full-duplex communication channels over a single TCP connection.
+* **Service Workers API:** Allows background scripts to handle network requests, cache resources, and provide offline functionality.
+* **Notifications API:** Allows web pages to send notifications to the user's device.
+* **Device APIs:** Provides information about the battery status of the device. Provides information about the physical orientation of the device.
+* **Media APIs:** Provides access to media input devices like cameras and microphones.
+* **Clipboard API:** Provides a way to read from and write to the clipboard.
+* **Payment Request API:** Provides a way to handle payments in web applications.
+* **Performance API:** Provides methods to measure the performance of the web application.
+* **Drag and Drop API:** Provides the functionality to create draggable elements.
+* **File API:** Allows web applications to read the contents of files.
+* **Fullscreen API:** Allows an element to be displayed in fullscreen mode.
+* **History API:** Provides access to the browser's session history.
+* **Speech API:** Converts text to speech, Converts speech to text.
+* **Web Animations API:** `Element.animate()`: Provides a way to animate elements.
+
 
 ## Design Patterns
+Design patterns are reusable solutions to common problems in software design. 
+They represent best practices that have evolved and are widely accepted by developers. 
+design patterns can help create more maintainable, flexible, and scalable code. 
 
 **Creational Patterns**
-* Singleton
-* Factory Method
-* Abstract Factory
-* Builder
-* Prototype
-* Provider
-* Prototype
-* Observer
-* Module
-* HOC
+  * [Singleton]()
+  * [Factory Method]()
+ * Abstract Factory
+  * [Builder]()
+  * Prototype
+  * Provider
+  * HOC
 
 **Structural Patterns**
-* Adapter
-* Decorator
-* Facade
-* Proxy
-  
+  * [Module]()
+  * Adapter
+  * [Decorator]()
+  * Facade
+  * Proxy
+
+**Behavioral Patterns**
+  * Observer
+  * Command
+  * Strategy Pattern
+
+#### Singleton Pattern
+The Singleton pattern ensures a class has only one instance and provides a global point of access to it.
+
+```javascript
+const Singleton = (function() {
+  let instance;
+
+  function createInstance() {
+    return new Object("I am the instance");
+  }
+
+  return {
+    getInstance: function() {
+      if (!instance) {
+        instance = createInstance();
+      }
+      return instance;
+    }
+  };
+})();
+
+const instance1 = Singleton.getInstance();
+const instance2 = Singleton.getInstance();
+console.log(instance1 === instance2); // true
+
+```
+
+#### Factory Pattern
+
+The Factory pattern provides a way to create objects without specifying the exact class of object that will be created.
+
+```javascript
+class Car {
+  constructor() {
+    this.type = "car";
+  }
+}
+
+class Truck {
+  constructor() {
+    this.type = "truck";
+  }
+}
+
+class VehicleFactory {
+  createVehicle(vehicleType) {
+    if (vehicleType === "car") {
+      return new Car();
+    } else if (vehicleType === "truck") {
+      return new Truck();
+    }
+  }
+}
+
+const factory = new VehicleFactory();
+const car = factory.createVehicle("car");
+const truck = factory.createVehicle("truck");
+console.log(car.type); // car
+console.log(truck.type); // truck
+
+```
+
+#### Module Pattern
+The Module pattern encapsulates related code into a single unit of code, which can be used to avoid polluting the global scope.
+
+seems like uses the closure function
+
+```javascript
+const Module = (function() {
+  let privateVar = "I am private";
+
+  function privateMethod() {
+    console.log(privateVar);
+  }
+
+  return {
+    publicMethod: function() {
+      privateMethod();
+    }
+  };
+})();
+
+Module.publicMethod(); // I am private
+```
+
+#### Decorator Pattern
+The Decorator pattern allows behavior to be added to individual objects, dynamically, without affecting the behavior of other objects from the same class.
+
+```javascript
+class Car {
+  constructor() {
+    this.cost = function() {
+      return 20000;
+    };
+  }
+}
+
+function carWithSunroof(car) {
+  car.hasSunroof = true;
+  const prevCost = car.cost();
+  car.cost = function() {
+    return prevCost + 1500;
+  };
+}
+
+function carWithLeatherSeats(car) {
+  car.hasLeatherSeats = true;
+  const prevCost = car.cost();
+  car.cost = function() {
+    return prevCost + 2000;
+  };
+}
+
+const myCar = new Car();
+carWithSunroof(myCar);
+carWithLeatherSeats(myCar);
+
+console.log(myCar.cost()); // 23500
+console.log(myCar.hasSunroof); // true
+console.log(myCar.hasLeatherSeats); // true
+
+```
+
+#### Observer Pattern
+
+The Observer pattern defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.
+
+```javascript
+class Subject {
+  constructor() {
+    this.observers = [];
+  }
+
+  addObserver(observer) {
+    this.observers.push(observer);
+  }
+
+  removeObserver(observer) {
+    this.observers = this.observers.filter(obs => obs !== observer);
+  }
+
+  notifyObservers(message) {
+    this.observers.forEach(observer => observer.update(message));
+  }
+}
+
+class Observer {
+  constructor(name) {
+    this.name = name;
+  }
+
+  update(message) {
+    console.log(`${this.name} received message: ${message}`);
+  }
+}
+
+const subject = new Subject();
+const observer1 = new Observer("Observer 1");
+const observer2 = new Observer("Observer 2");
+
+subject.addObserver(observer1);
+subject.addObserver(observer2);
+
+subject.notifyObservers("Hello Observers!"); // Observer 1 received message: Hello Observers! // Observer 2 received message: Hello Observers!
+
+```
+
 ##  Working of JS Engine 
+
+JavaScript engines are responsible for interpreting and executing JavaScript code in web browsers, servers (Node.js), or other environments where JavaScript runs. Understanding how a JavaScript engine works involves grasping its key components and the process it follows to execute JavaScript code efficiently.
+
+**Key Components of a JavaScript Engine:**<br><br>
+
+**Parser:** The parser reads the JavaScript code and converts it into an Abstract Syntax Tree (AST) representation. This tree structure represents the grammatical structure of the code.
+
+
+**Interpreter:** The interpreter translates the AST into machine code or bytecode directly executable by the computer's processor. This step involves converting JavaScript instructions into low-level instructions that the computer can understand and execute.
+
+
+**Compiler:** Some JavaScript engines use a compiler to optimize code performance. The compiler can perform various optimizations like inlining functions, reordering code, and eliminating unused code paths to improve execution speed.
+
+
+**Memory Heap:** The memory heap is where objects (including function objects and closures) are allocated when memory is requested during code execution. Memory management is crucial to prevent memory leaks and optimize performance.
+
+
+**Call Stack:** The call stack keeps track of the currently executing functions. When a function is called, it is pushed onto the stack. When the function completes, it is popped off the stack. This mechanism manages the execution context of JavaScript code, including function calls and returns.
+
+
+**Execution Process of JavaScript Code:**<br><br>
+
+* **Parsing:** The JavaScript engine starts by parsing the source code to create an AST.
+* **Compilation:** The AST is then compiled into bytecode or machine code. In modern engines, compilation may occur just-in-time (JIT), where code is optimized during runtime.
+* **Execution:** The compiled code is executed line by line. The call stack manages the order and context of function calls.
+* **Memory Management:** The engine manages memory allocation and deallocation to store variables, objects, and function references.
+
+
+**JavaScript Engine Examples**<br><br>
+
+* V8 (Chrome, Node.js): Developed by Google, V8 is a high-performance engine that compiles JavaScript directly into native machine code.
+* SpiderMonkey (Firefox): Mozilla's JavaScript engine that utilizes both interpreted and JIT compilation techniques.
+* JavaScriptCore (Safari): Apple's engine that includes the Nitro JIT compiler for fast execution.
+* Chakra (Microsoft Edge): Originally used in Edge, now replaced by the Chromium-based engine in newer versions.
+
+**Optimizations:**
+
+* Just-in-Time (JIT) Compilation: Dynamically compiles frequently executed code into native machine code for faster execution.
+* Inline Caching: Optimizes property access by caching property lookups.
+* Garbage Collection: Manages memory automatically, reclaiming unused memory to prevent leaks.
+
 
 # Coding concepts
 
@@ -1577,7 +2139,150 @@ setTimeout: Use clearTimeout(timeoutID) to prevent the function from being execu
 `setInterval`: Use `clearInterval(intervalID)` to stop the repeated execution.
 
 ## 11. High Order Functions 
+Higher-order functions are functions that operate on other functions by taking them as arguments or returning them as results. 
+In JavaScript, functions are treated as first-class citizens, which means they can be manipulated and passed around just like any other data type (e.g., `strings`, `numbers`).
+
+* Accepting Functions as Arguments: A higher-order function can take one or more functions as arguments.
+* Returning Functions: It can also return a function as its result.
+
+`map()`, `filter()`, `reduce()`, `forEach()`: Array methods that accept callback functions.
+
+`setTimeout()`, `setInterval()`: Functions that accept function callbacks to execute after a delay or at intervals.
+
+Event handlers in DOM manipulation `(addEventListener())`.
+
+### First-order functions
+
+First-order functions are functions that do not accept other functions as arguments or return functions as their output. 
+
+They are standard functions that operate solely with data and do not involve higher-order operations like passing functions around or returning functions.
+
+* Operate on Data
+* No functions are arguments
+* No functions are return values
+
+### Pure functions
+ A pure function in JavaScript is a function that, given the same input, will always return the same output and has no side effects. In other words, it adheres to two main principles:
+ * Deterministic: The function always produces the same output for the same set of inputs. This ensures predictability and reliability in your code.
+ * No Side Effects: The function does not modify variables outside of its scope (global variables) or perform any observable actions (such as modifying a mutable object passed as an argument) that could affect the calling scope or the program's state.
+
+
+* Input-Output Relationship: Pure functions rely only on their arguments (inputs) to produce a result (output). They do not depend on any external state that could change over time.
+* Referential Transparency: The concept that a function call can be replaced with its resulting value without changing the program's behavior. This property simplifies reasoning about code and enables optimizations.
+
+```javascript
+// Pure function: It only depends on its arguments and returns a new value
+function square(x) {
+  return x * x;
+}
+
+console.log(square(3)); // Output: 9
+console.log(square(3)); // Output: 9
+```
+
 ## 12. Call, Apply, Bind 
+In JavaScript, `call`, `apply`, and `bind` are methods that allow you to manipulate how a function is called and how it executes. 
+They provide ways to set the context `(the value of this)` and pass arguments to functions when invoking them.
+
+#### 1. `call`
+The `call` method allows you to call a function with a given `this` value and arguments provided individually.
+
+Syntax:
+
+```javascript
+function.call(thisArg, arg1, arg2, ...);
+```
+`thisArg`: The value of this to be used when executing the function.
+`arg1, arg2, ...`: Optional arguments passed to the function.
+
+```javascript
+const person = {
+  fullName: function() {
+    return this.firstName + " " + this.lastName;
+  }
+};
+
+const person1 = {
+  firstName: "John",
+  lastName: "Doe"
+};
+
+const person2 = {
+  firstName: "Jane",
+  lastName: "Doe"
+};
+
+// Call fullName with person1 as context
+console.log(person.fullName.call(person1)); // Output: "John Doe"
+
+// Call fullName with person2 as context
+console.log(person.fullName.call(person2)); // Output: "Jane Doe"
+```
+
+#### 2. `apply`
+The `apply` method is similar to call, but it accepts arguments as an array or an array-like object.
+
+Syntax:
+
+```javascript
+function.apply(thisArg, [argsArray]);
+```
+`thisArg:` The value of this to be used when executing the function.
+`argsArray:` An array or array-like object containing arguments to be passed to the function.
+Example:
+
+```javascript
+const numbers = [5, 6, 2, 3, 7];
+
+const max = Math.max.apply(null, numbers);
+console.log(max); // Output: 7
+```
+
+#### 3. `bind`
+The `bind` method creates a new function that, when called, has its this keyword set to a specified value, with a given sequence of arguments preceding any provided when the new function is called.
+
+Syntax:
+
+```javascript
+function.bind(thisArg[, arg1[, arg2[, ...]]]);
+```
+`thisArg:` The value of this to be used when executing the function.
+`arg1, arg2, ...:` Optional arguments that are prepended to arguments provided to the bound function when invoking it.
+
+Example:
+
+```javascript
+const module = {
+  x: 42,
+  getX: function() {
+    return this.x;
+  }
+};
+
+const unboundGetX = module.getX;
+console.log(unboundGetX()); // Output: undefined
+
+const boundGetX = module.getX.bind(module);
+console.log(boundGetX()); // Output: 42
+
+```
+
+**KeyDifference**<br><br>
+1. Arguments Passing:
+
+   * `call` and `apply` allow you to pass arguments individually or as an array/object, respectively.
+   * `bind` creates a new function with pre-specified arguments that can be appended later.
+
+2. Immediate vs Delayed Execution:
+
+   * `call` and `apply` immediately invoke the function with the provided context (this value).
+   * `bind` returns a new function with the bound context (this value), which can be invoked later.
+
+3. Original Function vs New Function:
+
+   * `call` and `apply` invoke the original function with the specified context and arguments.
+   * bind creates a new function that, when invoked, uses the specified context.
+
 ## 13. Hoisting and Temporal dead zone
 ### Hiosting
 Hoisting is a JavaScript mechanism where variables, function declarations, and classes are moved to the top of their containing scope during the compile phase. This means that you can use variables and functions before you declare them in your code.
