@@ -2343,6 +2343,77 @@ let obj = {...language};
 console.log('2' in language);
 console.log('javascript' in obj);
 ```
+
+### Explanation
+
+Step 1: Understanding the array
+let language = ['python', 'javascript'];
+
+An array is basically an object with numeric keys:
+
+```javascript language = {
+  0: 'python',
+  1: 'javascript',
+  length: 2
+} ```
+
+🔍 Step 2: The spread operation into an object
+let obj = { ...language };
+
+
+👉 The spread operator (...) copies the enumerable own properties from language into a new object.
+
+So:
+
+```javascript 
+obj = {
+  0: 'python',
+  1: 'javascript'
+}```
+
+
+💡 The length property is not enumerable, so it’s not copied.
+
+🔍 Step 3: First line
+console.log('2' in language);
+
+
+The in operator checks whether a property key exists in the object (including arrays).
+
+Let’s see what keys language has:
+
+Keys: '0', '1', and also 'length' (inherited from Array)
+
+So:
+
+'2' ❌ does not exist (since indices are 0 and 1)
+
+✅ Output:
+
+false
+
+🔍 Step 4: Second line
+```javascript 
+console.log('javascript' in obj);```
+
+
+Now, obj looks like:
+
+```javascript {
+  0: 'python',
+  1: 'javascript'
+}```
+
+
+👉 The in operator checks for property names, not values.
+
+So 'javascript' is a value, not a key.
+
+✅ Output:
+
+false
+
+
 ## 2. Swap the two variables' values without using the temporary variable
 
 ```javascript
